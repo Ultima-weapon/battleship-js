@@ -1,6 +1,10 @@
-#board-space
+#placement-options
 {
-    margin-top: 3%;
+    padding-bottom: 2%;
+}
+.selector-btn
+{
+    margin-right: 5px;
 }
 
 #footer
