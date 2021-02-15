@@ -1,4 +1,11 @@
 $("#btn-start-game").click(function() {
-    $("#board-1").fadeIn(800);
-    $("#start-game").fadeOut(800);
+    let numberOfShips = parseInt($("#no-of-ships").val());
+
+    if (numberOfShips <= 6 && numberOfShips > 0)
+    {
+        alert("Success");
+    } else {
+        alert("Failure.");
+        $("#no-of-ships-err").fadeIn(200);
+    }
 });
