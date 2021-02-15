@@ -10,353 +10,51 @@
     <body>
 
         <!-- Heading -->
-        <div id="heading" class="container has-text-centered">
+        <div id="header" class="container has-text-centered">
             <h1 class="is-size-1">Battleship.js</h1>
             <h2 class="is-size-4">The classic game in your browser</h2>
         </div>
 
-        <!-- Start Game Box -->
-        <div id="start-game" class="container has-text-centered">
-            <div class="columns is-centered">
-                <div class="column is-one-third">
-                    <p>Click the Start button to begin!</p>
-                    <p id="no-of-ships-err" class="has-text-danger hide">Please input an integer between 1 and 6.</p>
-                    <label class="label">Number of ships:</label>
-                    <div class="field has-addons has-addons-centered">
-                        <div class="control">
-                          <input id="no-of-ships" name="no-of-ships" class="input" type="text" placeholder="1-6">
-                        </div>
-                        <div class="control">
-                          <button id="btn-start-game" class="button is-success">
-                            Start!
-                          </button>
-                        </div>
-                      </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Placement Options Box -->
-        <div id="placement-options" class="container hide">
-            <div id="axis-controls" class="is-grouped">
-                <label for="x-axis">X-Axis</label>
-                <input name="axis" class="radio" id="x-axis" type="radio" checked>
-
-                <label for="y-axis">Y-Axis</label>
-                <input name="axis" class="radio" id="y-axis" type="radio">
-            </div>
-
-            <div id="ship-selector" class="is-grouped">
- 
-            </div>
-        </div>
-
         <!-- Board Space -->
-        <div id="board-space" class="container hide">
-            <div class="columns">
-                    <div id="board-1" class="column">
-                            <table id="player-1" class="board table is-bordered is-hoverable is-fullwidth has-text-centered">
-                                <tr>
-                                    <th></th>
-                                    <th>A</th>
-                                    <th>B</th>
-                                    <th>C</th>
-                                    <th>D</th>
-                                    <th>E</th>
-                                    <th>F</th>
-                                    <th>G</th>
-                                    <th>H</th>
-                                    <th>I</th>
-                                    <th>J</th>
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>3</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>4</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>5</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>6</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>7</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>8</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>9</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>10</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
+        <div id="board-space" class="container start-game">
+            <div id="start-game" class="has-text-centered">
+                <p>Click the Start button to begin!</p>
+                <p id="no-of-ships-err" class="has-text-danger hide">Please input an integer between 1 and 6.</p>
+                <label class="label">Number of ships:</label>
+                <div class="field has-addons has-addons-centered">
+                    <div class="control">
+                        <input id="no-of-ships" name="no-of-ships" class="input" type="text" placeholder="1-6">
                     </div>
-                    
-                    <div id="board-2" class="column container">
-                        <table id="player-2" class="board table is-bordered is-hoverable is-fullwidth has-text-centered">
-                            <tr id="board-heading">
-                                <th></th>
-                                <th>A</th>
-                                <th>B</th>
-                                <th>C</th>
-                                <th>D</th>
-                                <th>E</th>
-                                <th>F</th>
-                                <th>G</th>
-                                <th>H</th>
-                                <th>I</th>
-                                <th>J</th>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>4</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>5</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>6</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>7</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>8</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>9</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>10</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </table>
-                    </div> 
+                    <div class="control">
+                        <button id="btn-start-game" class="button is-success">
+                        Start!
+                        </button>
+                    </div>
                 </div>
+            </div>
+
+            <div id="placement-options" class="hide has-text-centered">
+                <div id="axis-controls" class="is-grouped">
+                    <label for="x-axis">X-Axis</label>
+                    <input name="axis" class="radio" id="x-axis" type="radio" checked>
+    
+                    <label for="y-axis">Y-Axis</label>
+                    <input name="axis" class="radio" id="y-axis" type="radio">
+                </div>
+    
+                <div id="ship-selector" class="is-grouped">
+        
+                </div>
+            </div>
+
+            <div id="board" class="container">
+
+            </div>
         </div>
 
         <!-- Footer -->
-        <footer class="flex-wrapper">
-            <div id="footer" class="container has-text-centered">
-                <p>&copy; Best Programming Group 2021</p>
-            </div>
+        <footer id="footer" class="container has-text-centered">
+            <p>&copy; Best Programming Group 2021</p>
         </footer>
 
 
