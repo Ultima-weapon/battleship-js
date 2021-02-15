@@ -37,10 +37,10 @@
         </div>
 
         <!-- Placement Options Box -->
-        <div id="placement-options" class="container">
+        <div id="placement-options" class="container hide">
             <div id="axis-controls" class="is-grouped">
                 <label for="x-axis">X-Axis</label>
-                <input name="axis" class="radio" id="x-axis" type="radio">
+                <input name="axis" class="radio" id="x-axis" type="radio" checked>
 
                 <label for="y-axis">Y-Axis</label>
                 <input name="axis" class="radio" id="y-axis" type="radio">
@@ -52,7 +52,7 @@
         </div>
 
         <!-- Board Space -->
-        <div id="board-space" class="container">
+        <div id="board-space" class="container hide">
             <div class="columns">
                     <div id="board-1" class="column">
                             <table id="player-1" class="board table is-bordered is-hoverable is-fullwidth has-text-centered">
@@ -353,9 +353,12 @@
         </div>
 
         <!-- Footer -->
-        <div id="footer" class="container has-text-centered">
-            <p>&copy; Best Programming Group 2021</p>
-        </div>
+        <footer class="flex-wrapper">
+            <div id="footer" class="container has-text-centered">
+                <p>&copy; Best Programming Group 2021</p>
+            </div>
+        </footer>
+
 
         <!-- JavaScript includes -->
         <script type="text/javascript" src="js/jquery.min.js"></script>
