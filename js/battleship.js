@@ -9,26 +9,24 @@ function addButtons(numberOfShips)
 
 function generateBoard(playerNo)
 {
-    console.log("Generating blank board...");
-
-    $("#board").append("<table id='player-1' class='table is-bordered is-fullwidth has-text-centered'></table>");
+    $("#board").append("<table id='player-" + playerNo + "' class='table is-bordered is-fullwidth has-text-centered hide'></table>");
     for (var i = 0; i < 11; i++) {
-        $("#player-" + playerNo).append("<tr id='row-" + i + "'></tr>");
+        $("#player-" + playerNo).append("<tr id='" + playerNo + "-row-" + i + "'></tr>");
         for (var j = 0; j < 11; j++) {
             if (i == 0 && j == 0)
             {
-                $("#row-" + i).append("<td id='origin'></td>");
+                $("#" + playerNo + "-row-" + i).append("<td id='origin'></td>");
             } else if (i == 0) {
-                $("#row-" + i).append("<th>" + j +"</th>")
+                $("#" + playerNo + "-row-" + i).append("<th>" + j +"</th>")
             } else if (j == 0) {
-                $("#row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() +"</th>")
+                $("#" + playerNo + "-row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() +"</th>")
             } else {
-                $("#row-" + i).append("<td id='" + i.toString() + j.toString() + "'></td>");
+                $("#" + playerNo + "-row-" + i).append("<td id='" + i.toString() + j.toString() + "'></td>");
             }
         }
     }
 
-    console.log("Finished generating player board for " + playerNo + ".");
+    console.log("Finished generating board for player " + playerNo + ".");
 }
 
 $("#btn-start-game").click(function() {
@@ -36,11 +34,14 @@ $("#btn-start-game").click(function() {
 
     if (numberOfShips <= 6 && numberOfShips > 0)
     {
+        console.log("Acceptable input parameters to begin game.");
         addButtons(numberOfShips);
         generateBoard(1);
+
+        generateBoard(2);
         $("#start-game").slideUp(400);
         $("#placement-options").slideDown(400);
-        $("#board").slideDown(400);
+        $("#player-1").slideDown(400);
     } else {
         $("#no-of-ships-err").slideDown(400);
     }
