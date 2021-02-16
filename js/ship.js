@@ -10,7 +10,6 @@ class Ship
 
         if (orientation == 'x')
         {
-            this.cells = [];
             for (let i = 0; i < size; i++)
             {
                 this.cells.push(i);
