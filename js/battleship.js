@@ -15,13 +15,13 @@ function generateBoard(playerNo)
         for (var j = 0; j < 11; j++) {
             if (i == 0 && j == 0)
             {
-                $("#" + playerNo + "-row-" + i).append("<td id='origin'></td>");
+                $("#" + playerNo + "-row-" + i).append("<th id='origin'></th>");
             } else if (i == 0) {
                 $("#" + playerNo + "-row-" + i).append("<th>" + j +"</th>")
             } else if (j == 0) {
                 $("#" + playerNo + "-row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() +"</th>")
             } else {
-                $("#" + playerNo + "-row-" + i).append("<td id='" + i.toString() + j.toString() + "'></td>");
+                $("#" + playerNo + "-row-" + i).append("<td id='" + i.toString() + j.toString() + "' class='board-tile'></td>");
             }
         }
     }

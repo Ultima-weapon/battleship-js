@@ -36,6 +36,18 @@
   margin: 0 auto;
 }
 
+/*
 td:hover {
   background-color: darkgrey;
+}
+*/
+
+.ship-outline
+{
+    background-color: #000;
+}
+
+.ship-outline-fail
+{
+    background-color: red;
 }
