@@ -1,34 +1,53 @@
 class Ship
 {
-    constructor(size, orientation, position) 
+    constructor(size, orientation, origin) 
     {
         this.size = size;
-        this.position = position;
+        this.origin = origin;
         this.cells = [];
         this.hits = [];
+        this.name = "";
 
+        switch(this.size)
+        {
+            case 1:
+                this.name = "Patrol Boat";
+                break;
+            case 2:
+                this.name = "Destroyer";
+                break;
+            case 3:
+                this.name = "Cruiser";
+                break;
+            case 4:
+                this.name = "Submarine";
+                break;
+            case 5:
+                this.name = "Battleship";
+                break;
+            case 6:
+                this.name = "Carrier";
+                break;
+        }
 
         if (orientation == 'x')
         {
             for (let i = 0; i < size; i++)
             {
-                this.cells.push(i);
+                this.cells.push(origin + i);
             }
         }
         else if (orientation == 'y')
         {
-            for (let i = 0; i < size; i += 10)
+            for (let i = 0; i < size; i++)
             {
-                this.cells.push(i);
+                this.cells.push(origin + (i*10));
             }
         }
-
-        console.log("Created ship of size: " + this.size);
-        console.log("Ship occupies cells: " + this.cells);
     }
 
     isSunk() 
     {
-        return (hits == size);
+        return (this.hits.length == this.size);
     }
 };
