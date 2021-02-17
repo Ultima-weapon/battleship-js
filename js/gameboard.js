@@ -14,7 +14,7 @@ $(document).on('click', ".board-tile", function() {
 });
 
 // Showing ship outline
-$(document).on('mouseover', ".board-tile", function() {
+$(document).on('click', ".board-tile", function() {
     let shipSize = 0;
     $('#ship-selector').children('button').each(function () {
         if ($('#' + this.id).is(":disabled")) {
@@ -70,6 +70,6 @@ $(document).on('mouseover', ".board-tile", function() {
 
 // Remove classes on mouse leave
 $(document).on('mouseleave', ".board-tile", function () {
-    $(".board-tile").removeClass("ship-outline");
+    //$(".board-tile").removeClass("ship-outline");
     $(".board-tile").removeClass("ship-outline-fail");
 });
