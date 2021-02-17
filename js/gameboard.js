@@ -8,7 +8,7 @@ $(document).on('click', ".selector-btn", function() {
 
 // Placing ships
 $(document).on('click', ".board-tile", function() {
-    let newShip = new Ship(6, 'x', this.id);
+    let newShip = new Ship(6, 'x', parseInt(this.id));
     console.log(newShip);
     //player.addShip(newShip);
 });
@@ -47,6 +47,7 @@ $(document).on('mouseover', ".board-tile", function() {
         {
             let selector = "#" + row.toString() + (parseInt(col) + i).toString();
             $(selector).addClass(addedClass);
+            
         }
     }
     else if ($("#y-axis").is(":checked"))
