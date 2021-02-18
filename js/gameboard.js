@@ -1,24 +1,29 @@
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
-    $('#ship-selector').children('button').each(function () {
-        $("#" + this.id).attr("disabled", false);
-    });
     $("#" + this.id).attr("disabled", true);
 });
 
 // Placing ships
 $(document).on('click', ".board-tile", function() {
-    let newShip = new Ship(6, 'x', parseInt(this.id));
+    let size=0;
+    $("#ship-selector").children('button').each(function () {
+        if ($('#' + this.id).is(":disabled")) {
+            size = (this.id).slice(3);
+        }
+    })
+    console.log(size)
+    let newShip = new Ship(parseInt(size), 'x', parseInt(this.id));
     console.log(newShip);
     //player.addShip(newShip);
 });
 
 // Showing ship outline
-$(document).on('click', ".board-tile", function() {
+$(document).on('mouseover', ".board-tile", function() {
     let shipSize = 0;
     $('#ship-selector').children('button').each(function () {
         if ($('#' + this.id).is(":disabled")) {
             shipSize = (this.id).slice(3);
+            console.log(shipSize)
         }
     });
 
@@ -70,6 +75,6 @@ $(document).on('click', ".board-tile", function() {
 
 // Remove classes on mouse leave
 $(document).on('mouseleave', ".board-tile", function () {
-    //$(".board-tile").removeClass("ship-outline");
+    $(".board-tile").removeClass("ship-outline");
     $(".board-tile").removeClass("ship-outline-fail");
 });
