@@ -9,18 +9,14 @@ function checkIfLegal(origin, orientation, size)
         col = parseInt((origin).substr(1, 2));
     }
 
-    console.log("Row: " + row);
-    console.log("Col: " + col);
-    console.log("Row + Col: " + (row + col));
-
     size = parseInt(size);
 
-    if (orientation == 'x' && (col + size) >= 10)
+    if (orientation == 'x' && (col + size) > 11)
     {
         console.log(col + size);
         return false;
     }
-    else if (orientation == 'y' && (row + size) >= 10)
+    else if (orientation == 'y' && (row + size) > 11)
     {
         return false;
     }
@@ -48,15 +44,22 @@ $(document).on('click', ".board-tile", function() {
         }
     });
     let newShip = new Ship(parseInt(size), axis, this.id);
-    console.log(newShip);
 
     if (checkIfLegal(this.id, axis, size))
     {
         console.log("Valid placement. Push to player");
+        if (player1.isTurn) player1.ships.push(newShip);
+        if (player2.isTurn) player2.ships.push(newShip);
+
+        console.log(player1);
+        console.log(player2);
     }
     else
     {
         console.log("Invalid placement. Do not push to player.");
+
+        console.log(player1);
+        console.log(player2);
     }
 });
 

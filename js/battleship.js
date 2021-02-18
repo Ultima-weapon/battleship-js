@@ -46,6 +46,3 @@ $("#btn-start-game").click(function() {
         $("#no-of-ships-err").slideDown(400);
     }
 });
-
-player1=new Ship();
-//alert(player1.length_1)
