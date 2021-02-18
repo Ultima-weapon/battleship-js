@@ -1,3 +1,35 @@
+function checkIfLegal(origin, orientation, size)
+{
+    let row = ""; let col = "";
+    if ((origin >= 101 && origin <= 109) || origin == 1010) {
+        row = parseInt((origin).substr(0, 2));
+        col = parseInt((origin).substr(2, 4));
+    } else {
+        row = parseInt((origin).substr(0, 1));
+        col = parseInt((origin).substr(1, 2));
+    }
+
+    console.log("Row: " + row);
+    console.log("Col: " + col);
+    console.log("Row + Col: " + (row + col));
+
+    size = parseInt(size);
+
+    if (orientation == 'x' && (col + size) >= 10)
+    {
+        console.log(col + size);
+        return false;
+    }
+    else if (orientation == 'y' && (row + size) >= 10)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
     $('#ship-selector').children('button').each(function () {
@@ -18,12 +50,14 @@ $(document).on('click', ".board-tile", function() {
     let newShip = new Ship(parseInt(size), axis, this.id);
     console.log(newShip);
 
-    if (test_player_1.isTurn)
-        test_player_1.ships.push(newShip);
-    else 
-        test_player_2.ships.push(newShip);
-    
-    console.log(test_player_1);
+    if (checkIfLegal(this.id, axis, size))
+    {
+        console.log("Valid placement. Push to player");
+    }
+    else
+    {
+        console.log("Invalid placement. Do not push to player.");
+    }
 });
 
 // Showing ship outline
