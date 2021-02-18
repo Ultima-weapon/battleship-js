@@ -8,3 +8,8 @@ console.log(test_ship_y);
 console.log(test_ship_x.isSunk());
 console.log(test_player_1);
 console.log(test_player_2);
+
+test_player_1.ships.push(test_ship_x);
+
+console.log(test_player_1);
+console.log(test_player_1.isTurn);
