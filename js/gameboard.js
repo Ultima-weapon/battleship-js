@@ -73,6 +73,65 @@ $(document).on('mouseover', ".board-tile", function() {
     }
 });
 
+//keeps ships where clicked
+$(document).on('click', ".board-tile", function() {
+    let shipSize = 0;
+    $('#ship-selector').children('button').each(function () {
+        if ($('#' + this.id).is(":disabled")) {
+            shipSize = (this.id).slice(3);
+        }
+    });
+
+    let row = ""; let col = "";
+    if ((this.id >= 101 && this.id <= 109) || this.id == 1010) {
+        row = (this.id).substr(0, 2);
+        col = (this.id).substr(2, 4);
+    } else {
+        row = (this.id).substr(0, 1);
+        col = (this.id).substr(1, 2);
+    }
+
+    let addedClass = "";
+
+    if ($("#x-axis").is(":checked"))
+    {
+        checkSum = (parseInt(col) + parseInt(shipSize));
+
+        if (checkSum > 11) {
+            addedClass = "ship-outline-fail";
+        } else {
+            addedClass = "ship-clicked";
+        }
+
+        for (let i = 0; i < shipSize; i++)
+        {
+            let selector = "#" + row.toString() + (parseInt(col) + i).toString();
+            $(selector).addClass(addedClass);
+        }
+        $('#ship-selector').children('button').each(function () {
+            if ($('#' + this.id).is(":disabled")) {
+                $("#" + this.id).attr("disabled", true);
+            }
+        });
+    }
+    else if ($("#y-axis").is(":checked"))
+    {
+        checkSum = (parseInt(row) + parseInt(shipSize));
+
+        if (checkSum > 11) {
+            addedClass = "ship-outline-fail";
+        } else {
+            addedClass = "ship-clicked";
+        }
+
+        for (let i = 0; i < shipSize; i++)
+        {
+            let selector = "#" + (parseInt(row) + i).toString() + col.toString();
+            $(selector).addClass(addedClass);
+        }
+    }
+});
+
 // Remove classes on mouse leave
 $(document).on('mouseleave', ".board-tile", function () {
     $(".board-tile").removeClass("ship-outline");

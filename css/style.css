@@ -47,7 +47,7 @@ td:hover {
 }
 
 .ship-clicked {
-  background-color: blue;
+  background-color: #000;
 }
 
 .ship-outline-fail {
