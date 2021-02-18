@@ -9,7 +9,7 @@ function addButtons(numberOfShips)
 
 function generateBoard(playerNo)
 {
-    let cellNo = 1;
+    let cellNo = 0;
     $("#board").append("<table id='player-" + playerNo + "' class='table is-bordered is-fullwidth has-text-centered hide'></table>");
     for (var i = 0; i < 11; i++) {
         $("#player-" + playerNo).append("<tr id='" + playerNo + "-row-" + i + "'></tr>");
