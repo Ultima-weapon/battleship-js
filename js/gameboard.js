@@ -1,28 +1,15 @@
 function checkIfLegal(origin, orientation, size)
 {
-    let row = ""; let col = "";
-    if ((origin >= 101 && origin <= 109) || origin == 1010) {
-        row = parseInt((origin).substr(0, 2));
-        col = parseInt((origin).substr(2, 4));
-    } else {
-        row = parseInt((origin).substr(0, 1));
-        col = parseInt((origin).substr(1, 2));
-    }
-
     size = parseInt(size);
-
-    if (orientation == 'x' && (col + size) > 11)
+    if (orientation == 'x')
     {
-        console.log(col + size);
-        return false;
-    }
-    else if (orientation == 'y' && (row + size) > 11)
-    {
-        return false;
+        // Check for bounds horizontally
+        return ((origin % 10) + size < 11);
     }
     else
     {
-        return true;
+        // Check for bounds vertically
+        return ((Math.floor(origin / 10) + size < 11));
     }
 }
 
@@ -47,26 +34,19 @@ $(document).on('click', ".board-tile", function() {
 
     if (checkIfLegal(this.id, axis, size))
     {
-        console.log("Valid placement. Push to player");
         if (player1.isTurn) player1.ships.push(newShip);
         if (player2.isTurn) player2.ships.push(newShip);
-
-        console.log(player1);
-        console.log(player2);
     }
     else
     {
-        console.log("Invalid placement. Do not push to player.");
 
-        console.log(player1);
-        console.log(player2);
     }
 });
 
 // Showing ship outline
 $(document).on('mouseover', ".board-tile", function() {
     // Set cell to the ID of td being hovered
-    let cell = this.id;
+    let cell = parseInt(this.id);
     // Grab axis control from radio buttons
     axis = ($("#x-axis").is(":checked") ? 'x' : 'y');
     // Grab size from buttons
@@ -74,36 +54,34 @@ $(document).on('mouseover', ".board-tile", function() {
 
     $('#ship-selector').children('button').each(function () {
         if ($('#' + this.id).is(":disabled")) {
+            // Grab ID from button that's selected
             size = (this.id).slice(3);
         }
     });
 
+    let isLegal = checkIfLegal(cell, axis, size);
+    let addedClass = isLegal ? 'ship-outline' : 'ship-outline-fail';
+
     if (axis == 'x')
     {
         // Show cells horizontally
-        console.log("Show " + size + " cells horizontally.");
 
         for (let i = 0; i < size; i++)
         {
-            let adjCell = parseInt(cell) + parseInt(i);
-
-            
-            $("#" + adjCell).addClass("ship-outline");
+            let adjCell = cell + i;
+            if ((adjCell % 10) >= cell % 10)
+                $("#" + adjCell).addClass(addedClass);
         }
     }
     else
     {
         // Show cells vertically
-        console.log("Show " + size + " cells vertically.");
         for (let i = 0; i < size; i++)
         {
             let adjCell = parseInt(cell) + parseInt(i)*10;
-            console.log("Adj Cell: " + adjCell);
-            $("#" + adjCell).addClass("ship-outline");
+            $("#" + adjCell).addClass(addedClass);
         }
-
     }
-    
 });
 
 //keeps ships where clicked
