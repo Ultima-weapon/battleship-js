@@ -23,7 +23,6 @@ $(document).on('mouseover', ".board-tile", function() {
     $('#ship-selector').children('button').each(function () {
         if ($('#' + this.id).is(":disabled")) {
             shipSize = (this.id).slice(3);
-            console.log(shipSize)
         }
     });
 
