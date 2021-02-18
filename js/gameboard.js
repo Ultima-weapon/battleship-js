@@ -8,15 +8,22 @@ $(document).on('click', ".selector-btn", function() {
 
 // Placing ships
 $(document).on('click', ".board-tile", function() {
-    let size=0;
+    let size= 0;
+    let axis = ($("#x-axis").is(":checked")) ? 'x' : 'y';
     $('#ship-selector').children('button').each(function () {
         if ($('#' + this.id).is(":disabled")) {
             size = (this.id).slice(3);
         }
     });
-    let newShip = new Ship(parseInt(size), 'x', this.id);
+    let newShip = new Ship(parseInt(size), axis, this.id);
     console.log(newShip);
-    //player.addShip(newShip);
+
+    if (test_player_1.isTurn)
+        test_player_1.ships.push(newShip);
+    else 
+        test_player_2.ships.push(newShip);
+    
+    console.log(test_player_1);
 });
 
 // Showing ship outline
