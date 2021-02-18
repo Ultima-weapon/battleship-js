@@ -9,6 +9,7 @@ function addButtons(numberOfShips)
 
 function generateBoard(playerNo)
 {
+    let cellNo = 1;
     $("#board").append("<table id='player-" + playerNo + "' class='table is-bordered is-fullwidth has-text-centered hide'></table>");
     for (var i = 0; i < 11; i++) {
         $("#player-" + playerNo).append("<tr id='" + playerNo + "-row-" + i + "'></tr>");
@@ -21,7 +22,8 @@ function generateBoard(playerNo)
             } else if (j == 0) {
                 $("#" + playerNo + "-row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() +"</th>")
             } else {
-                $("#" + playerNo + "-row-" + i).append("<td id='" + i.toString() + j.toString() + "' class='board-tile'></td>");
+                $("#" + playerNo + "-row-" + i).append("<td id='" + cellNo + "' class='board-tile'>" + cellNo + "</td>");
+                cellNo++;
             }
         }
     }
