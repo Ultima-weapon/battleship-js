@@ -1,18 +1,20 @@
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
+    $('#ship-selector').children('button').each(function () {
+        $("#" + this.id).attr("disabled", false);
+    });
     $("#" + this.id).attr("disabled", true);
 });
 
 // Placing ships
 $(document).on('click', ".board-tile", function() {
     let size=0;
-    $("#ship-selector").children('button').each(function () {
+    $('#ship-selector').children('button').each(function () {
         if ($('#' + this.id).is(":disabled")) {
             size = (this.id).slice(3);
         }
-    })
-    console.log(size)
-    let newShip = new Ship(parseInt(size), 'x', parseInt(this.id));
+    });
+    let newShip = new Ship(parseInt(size), 'x', this.id);
     console.log(newShip);
     //player.addShip(newShip);
 });
@@ -51,7 +53,6 @@ $(document).on('mouseover', ".board-tile", function() {
         {
             let selector = "#" + row.toString() + (parseInt(col) + i).toString();
             $(selector).addClass(addedClass);
-            
         }
     }
     else if ($("#y-axis").is(":checked"))
