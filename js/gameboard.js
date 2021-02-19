@@ -1,3 +1,21 @@
+function test(button_on, spots){
+    spots_6=[]
+    if (button_on=='btn6'){
+        spots_6.push(spots)
+        $("#btn6").addClass('clicked')
+    }
+
+}
+
+function Getspots(spots){
+    
+}
+
+function Checkclass(spots){
+    if($("#btn6").hasClass('clicked')){
+        console.log(spots)
+   }
+}
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
     $('#ship-selector').children('button').each(function () {
@@ -17,6 +35,27 @@ $(document).on('click', ".board-tile", function() {
     let newShip = new Ship(parseInt(size), 'x', this.id);
     console.log(newShip);
     //player.addShip(newShip);
+});
+
+$(document).on('click', ".board-tile", function() {
+    $('#ship-selector').children('button').each(function () {
+        if ($('#' + this.id).is(":disabled")) {
+            if(this.id=='btn1'){
+                $("#btn1").hide()
+
+            }else if(this.id=='btn2'){
+                $("#btn2").hide()
+            }else if(this.id=='btn3'){
+                $("#btn3").hide()
+            }else if(this.id=='btn4'){
+                $("#btn4").hide()
+            }else if(this.id=='btn5'){
+                $("#btn5").hide()
+            }else if(this.id=='btn6'){
+                $("#btn6").hide()
+            }
+        }
+    });
 });
 
 // Showing ship outline
@@ -106,13 +145,19 @@ $(document).on('click', ".board-tile", function() {
         for (let i = 0; i < shipSize; i++)
         {
             let selector = "#" + row.toString() + (parseInt(col) + i).toString();
-            $(selector).addClass(addedClass);
+            //if($("#btn1").hasClass('clicked')){
+             //   console.log('already placed ship')
+            //}
+                //we need to see which button we are on and if the button then the board has been clicked
+                $('#ship-selector').children('button').each(function () {
+                    if ($('#' + this.id).is(":disabled")) {
+                        test(this.id, selector)
+                        $(selector).addClass(addedClass);
+                    }
+                });
         }
-        $('#ship-selector').children('button').each(function () {
-            if ($('#' + this.id).is(":disabled")) {
-                $("#" + this.id).attr("disabled", true);
-            }
-        });
+        Checkclass()
+    
     }
     else if ($("#y-axis").is(":checked"))
     {
