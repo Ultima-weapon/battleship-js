@@ -7,8 +7,13 @@ function removes_ship(spots, button, axis, origin){
             }
         }
         else{
-            add_ship_to_class(6, axis, origin)
-            $("#btn6").addClass('clicked')
+            if($('#'+origin).hasClass('ship-outline-fail')){
+                
+            }
+            else{
+                add_ship_to_class(6, axis, origin)
+                $("#btn6").addClass('clicked')
+            }
         }
     }
     else if (button=='btn5'){
@@ -18,8 +23,13 @@ function removes_ship(spots, button, axis, origin){
             }
         }
         else{
-            add_ship_to_class(5, axis, origin)
-            $("#btn5").addClass('clicked')
+            if($('#'+origin).hasClass('ship-outline-fail')){
+                
+            }
+            else{
+                add_ship_to_class(5, axis, origin)
+                $("#btn5").addClass('clicked')
+            }
         }
     }
     else if (button=='btn4'){
@@ -29,8 +39,13 @@ function removes_ship(spots, button, axis, origin){
             }
         }
         else{
-            add_ship_to_class(4, axis, origin)
-            $("#btn4").addClass('clicked')
+            if($('#'+origin).hasClass('ship-outline-fail')){
+                
+            }
+            else{
+                add_ship_to_class(4, axis, origin)
+                $("#btn4").addClass('clicked')
+            }
         }
     }
     else if (button=='btn3'){
@@ -40,8 +55,13 @@ function removes_ship(spots, button, axis, origin){
             }
         }
         else{
-            add_ship_to_class(3, axis, origin)
-            $("#btn3").addClass('clicked')
+            if($('#'+origin).hasClass('ship-outline-fail')){
+                
+            }
+            else{
+                add_ship_to_class(3, axis, origin)
+                $("#btn3").addClass('clicked')
+            }
         }
     }
     else if (button=='btn2'){
@@ -51,8 +71,13 @@ function removes_ship(spots, button, axis, origin){
             }
         }
         else{
-            add_ship_to_class(2, axis, origin)
-            $("#btn2").addClass('clicked')
+            if($('#'+origin).hasClass('ship-outline-fail')){
+                
+            }
+            else{
+                add_ship_to_class(2, axis, origin)
+                $("#btn2").addClass('clicked')
+            }
         }
     }
     else if (button=='btn1'){
@@ -62,8 +87,13 @@ function removes_ship(spots, button, axis, origin){
             }
         }
         else{
-            add_ship_to_class(1, axis, origin)
-            $("#btn1").addClass('clicked')
+            if($('#'+origin).hasClass('ship-outline-fail')){
+                
+            }
+            else{
+                add_ship_to_class(1, axis, origin)
+                $("#btn1").addClass('clicked')
+            }
         }
     }
 
