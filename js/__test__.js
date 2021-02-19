@@ -1,15 +1,12 @@
-let test_ship_x = new Ship(6, 'x', 11);
-let test_ship_y = new Ship(6, 'y', 11);
+let test_ship_1 = new Ship(6, [1, 2, 3, 4, 5, 6]);
+let test_ship_2 = new Ship(6, [0, 10, 20, 30, 40, 50, 60]);
+
 let test_player_1 = new Player(1);
 let test_player_2 = new Player(2);
 
-console.log(test_ship_x);
-console.log(test_ship_y);
-console.log(test_ship_x.isSunk());
-console.log(test_player_1);
-console.log(test_player_2);
+test_player_1.ships.push(test_ship_1);
+test_player_2.ships.push(test_ship_2);
 
-test_player_1.ships.push(test_ship_x);
+console.log(player1);
+console.log(player2);
 
-console.log(test_player_1);
-console.log(test_player_1.isTurn);

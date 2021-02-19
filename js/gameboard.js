@@ -13,6 +13,50 @@ function checkIfLegal(origin, orientation, size)
     }
 }
 
+function getCells(cell, axis, size)
+{
+    let cells = [];
+
+    if (axis == 'x')
+    {
+        // Show cells horizontally
+
+        for (let i = 0; i < size; i++)
+        {
+            let adjCell = cell + i;
+            if ((adjCell % 10) >= cell % 10)
+                cells.push(adjCell);
+        }
+    }
+    else
+    {
+        // Show cells vertically
+        for (let i = 0; i < size; i++)
+        {
+            let adjCell = parseInt(cell) + parseInt(i)*10;
+            if (adjCell < 100)
+                cells.push(adjCell);
+        }
+    }
+
+    if (cells.length == size)
+        return cells;
+    else
+        return false;
+}
+
+function getShipSize()
+{
+    let shipSize = 0;
+    $('#ship-selector').children('button').each(function () {
+        if ($('#' + this.id).is(":disabled")) {
+            shipSize = (this.id).slice(3);
+        }
+    });
+
+    return (shipSize);
+}
+
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
     $('#ship-selector').children('button').each(function () {
@@ -48,16 +92,9 @@ $(document).on('mouseover', ".board-tile", function() {
     // Set cell to the ID of td being hovered
     let cell = parseInt(this.id);
     // Grab axis control from radio buttons
-    axis = ($("#x-axis").is(":checked") ? 'x' : 'y');
+    let axis = ($("#x-axis").is(":checked") ? 'x' : 'y');
     // Grab size from buttons
-    let size = 0;
-
-    $('#ship-selector').children('button').each(function () {
-        if ($('#' + this.id).is(":disabled")) {
-            // Grab ID from button that's selected
-            size = (this.id).slice(3);
-        }
-    });
+    let size = getShipSize();
 
     let isLegal = checkIfLegal(cell, axis, size);
     let addedClass = isLegal ? 'ship-outline' : 'ship-outline-fail';
@@ -84,7 +121,28 @@ $(document).on('mouseover', ".board-tile", function() {
     }
 });
 
-//keeps ships where clicked
+// Keeping ships placed
+$(document).on('click', ".board-tile", function() {
+    // Grab cell number
+    let cell = parseInt(this.id);
+    // Grab ship size
+    let shipSize = getShipSize();
+    // Grab orientation
+    let axis = ($("#x-axis").is(":checked") ? 'x' : 'y');
+
+    let cells = getCells(cell, axis, shipSize);
+
+    let newShip = new Ship(shipSize, cells);
+
+    if (cells) {
+        if (player1.isTurn) {
+            player1.ships.push(newShip);
+            console.log(player1);
+        }
+    }
+});
+
+/*
 $(document).on('click', ".board-tile", function() {
     let shipSize = 0;
     $('#ship-selector').children('button').each(function () {
@@ -142,6 +200,7 @@ $(document).on('click', ".board-tile", function() {
         }
     }
 });
+*/
 
 // Remove classes on mouse leave
 $(document).on('mouseleave', ".board-tile", function () {
