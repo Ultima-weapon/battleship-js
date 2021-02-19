@@ -1,4 +1,5 @@
-function Checkclass(spots, button){
+//removes ship if same size shipped is tried to place again
+function removes_ship(spots, button, axis, origin){
     if (button=='btn6'){
         if($("#btn6").hasClass('clicked')){
             for(var x in spots){
@@ -6,6 +7,7 @@ function Checkclass(spots, button){
             }
         }
         else{
+            add_ship_to_class(6, axis, origin)
             $("#btn6").addClass('clicked')
         }
     }
@@ -16,6 +18,7 @@ function Checkclass(spots, button){
             }
         }
         else{
+            add_ship_to_class(5, axis, origin)
             $("#btn5").addClass('clicked')
         }
     }
@@ -26,6 +29,7 @@ function Checkclass(spots, button){
             }
         }
         else{
+            add_ship_to_class(4, axis, origin)
             $("#btn4").addClass('clicked')
         }
     }
@@ -36,6 +40,7 @@ function Checkclass(spots, button){
             }
         }
         else{
+            add_ship_to_class(3, axis, origin)
             $("#btn3").addClass('clicked')
         }
     }
@@ -46,6 +51,7 @@ function Checkclass(spots, button){
             }
         }
         else{
+            add_ship_to_class(2, axis, origin)
             $("#btn2").addClass('clicked')
         }
     }
@@ -56,10 +62,16 @@ function Checkclass(spots, button){
             }
         }
         else{
+            add_ship_to_class(1, axis, origin)
             $("#btn1").addClass('clicked')
         }
     }
 
+}
+
+function add_ship_to_class(size, axis, origin){
+    let newShip = new Ship(size, axis, origin);//this.id is origin
+    console.log(newShip);
 }
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
@@ -69,19 +81,7 @@ $(document).on('click', ".selector-btn", function() {
     $("#" + this.id).attr("disabled", true);
 });
 
-// Placing ships
-$(document).on('click', ".board-tile", function() {
-    let size=0;
-    $('#ship-selector').children('button').each(function () {
-        if ($('#' + this.id).is(":disabled")) {
-            size = (this.id).slice(3);
-        }
-    });
-    let newShip = new Ship(parseInt(size), 'x', this.id);
-    console.log(newShip);
-    //player.addShip(newShip);
-});
-
+//removes buttons once clicked
 $(document).on('click', ".board-tile", function() {
     $('#ship-selector').children('button').each(function () {
         if ($('#' + this.id).is(":disabled")) {
@@ -198,8 +198,7 @@ $(document).on('click', ".board-tile", function() {
                     }
                 });
         }
-        Checkclass(list, button)
-    
+        removes_ship(list, button, 'x', this.id)
     }
     else if ($("#y-axis").is(":checked"))
     {
@@ -222,7 +221,7 @@ $(document).on('click', ".board-tile", function() {
                 }
             });
         }
-        Checkclass(list, button)
+        removes_ship(list, button, 'y', this.id)
     }
 });
 
