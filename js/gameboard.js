@@ -65,28 +65,6 @@ $(document).on('click', ".selector-btn", function() {
     $("#" + this.id).attr("disabled", true);
 });
 
-// Placing ships
-$(document).on('click', ".board-tile", function() {
-    let size= 0;
-    let axis = ($("#x-axis").is(":checked")) ? 'x' : 'y';
-    $('#ship-selector').children('button').each(function () {
-        if ($('#' + this.id).is(":disabled")) {
-            size = (this.id).slice(3);
-        }
-    });
-    let newShip = new Ship(parseInt(size), axis, this.id);
-
-    if (checkIfLegal(this.id, axis, size))
-    {
-        if (player1.isTurn) player1.ships.push(newShip);
-        if (player2.isTurn) player2.ships.push(newShip);
-    }
-    else
-    {
-
-    }
-});
-
 // Showing ship outline
 $(document).on('mouseover', ".board-tile", function() {
     // Set cell to the ID of td being hovered
@@ -137,70 +115,23 @@ $(document).on('click', ".board-tile", function() {
     if (cells) {
         if (player1.isTurn) {
             player1.ships.push(newShip);
-            console.log(player1);
-        }
-    }
-});
-
-/*
-$(document).on('click', ".board-tile", function() {
-    let shipSize = 0;
-    $('#ship-selector').children('button').each(function () {
-        if ($('#' + this.id).is(":disabled")) {
-            shipSize = (this.id).slice(3);
-        }
-    });
-
-    let row = ""; let col = "";
-    if ((this.id >= 101 && this.id <= 109) || this.id == 1010) {
-        row = (this.id).substr(0, 2);
-        col = (this.id).substr(2, 4);
-    } else {
-        row = (this.id).substr(0, 1);
-        col = (this.id).substr(1, 2);
-    }
-
-    let addedClass = "";
-
-    if ($("#x-axis").is(":checked"))
-    {
-        checkSum = (parseInt(col) + parseInt(shipSize));
-
-        if (checkSum > 11) {
-            addedClass = "ship-outline-fail";
         } else {
-            addedClass = "ship-clicked";
+            player2.ships.push(newShip);
         }
-
-        for (let i = 0; i < shipSize; i++)
-        {
-            let selector = "#" + row.toString() + (parseInt(col) + i).toString();
-            $(selector).addClass(addedClass);
-        }
-        $('#ship-selector').children('button').each(function () {
-            if ($('#' + this.id).is(":disabled")) {
-                $("#" + this.id).attr("disabled", true);
-            }
-        });
     }
-    else if ($("#y-axis").is(":checked"))
+
+    if (cells.length == shipSize)
     {
-        checkSum = (parseInt(row) + parseInt(shipSize));
-
-        if (checkSum > 11) {
-            addedClass = "ship-outline-fail";
-        } else {
-            addedClass = "ship-clicked";
-        }
-
-        for (let i = 0; i < shipSize; i++)
+        for (let i = 0; i < cells.length; i++)
         {
-            let selector = "#" + (parseInt(row) + i).toString() + col.toString();
-            $(selector).addClass(addedClass);
+            $("#" + newShip.cells[i]).addClass("ship-clicked");
         }
     }
+
+    console.log(cells);
+    console.log(newShip);
+    console.log(player1);
 });
-*/
 
 // Remove classes on mouse leave
 $(document).on('mouseleave', ".board-tile", function () {
