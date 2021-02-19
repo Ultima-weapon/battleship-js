@@ -49,7 +49,7 @@ function getShipSize()
 {
     let shipSize = 0;
     $('#ship-selector').children('button').each(function () {
-        if ($('#' + this.id).is(":disabled")) {
+        if ($('#' + this.id).is(":disabled") && !$('#' + this.id).hasClass("hide")) {
             shipSize = (this.id).slice(3);
         }
     });
@@ -126,6 +126,8 @@ $(document).on('click', ".board-tile", function() {
         {
             $("#" + newShip.cells[i]).addClass("ship-clicked");
         }
+
+        $("#btn" + shipSize).addClass("hide");
     }
 
     console.log(cells);
