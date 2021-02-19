@@ -1,20 +1,65 @@
-function test(button_on, spots){
-    spots_6=[]
-    if (button_on=='btn6'){
-        spots_6.push(spots)
-        $("#btn6").addClass('clicked')
+function Checkclass(spots, button){
+    if (button=='btn6'){
+        if($("#btn6").hasClass('clicked')){
+            for(var x in spots){
+                $(spots[x]).removeClass("ship-clicked");
+            }
+        }
+        else{
+            $("#btn6").addClass('clicked')
+        }
+    }
+    else if (button=='btn5'){
+        if($("#btn5").hasClass('clicked')){
+            for(var x in spots){
+                $(spots[x]).removeClass("ship-clicked");
+            }
+        }
+        else{
+            $("#btn5").addClass('clicked')
+        }
+    }
+    else if (button=='btn4'){
+        if($("#btn4").hasClass('clicked')){
+            for(var x in spots){
+                $(spots[x]).removeClass("ship-clicked");
+            }
+        }
+        else{
+            $("#btn4").addClass('clicked')
+        }
+    }
+    else if (button=='btn3'){
+        if($("#btn3").hasClass('clicked')){
+            for(var x in spots){
+                $(spots[x]).removeClass("ship-clicked");
+            }
+        }
+        else{
+            $("#btn3").addClass('clicked')
+        }
+    }
+    else if (button=='btn2'){
+        if($("#btn2").hasClass('clicked')){
+            for(var x in spots){
+                $(spots[x]).removeClass("ship-clicked");
+            }
+        }
+        else{
+            $("#btn2").addClass('clicked')
+        }
+    }
+    else if (button=='btn1'){
+        if($("#btn1").hasClass('clicked')){
+            for(var x in spots){
+                $(spots[x]).removeClass("ship-clicked");
+            }
+        }
+        else{
+            $("#btn1").addClass('clicked')
+        }
     }
 
-}
-
-function Getspots(spots){
-    
-}
-
-function Checkclass(spots){
-    if($("#btn6").hasClass('clicked')){
-        console.log(spots)
-   }
 }
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
@@ -141,22 +186,19 @@ $(document).on('click', ".board-tile", function() {
         } else {
             addedClass = "ship-clicked";
         }
-
+        list=[]
         for (let i = 0; i < shipSize; i++)
         {
             let selector = "#" + row.toString() + (parseInt(col) + i).toString();
-            //if($("#btn1").hasClass('clicked')){
-             //   console.log('already placed ship')
-            //}
-                //we need to see which button we are on and if the button then the board has been clicked
                 $('#ship-selector').children('button').each(function () {
                     if ($('#' + this.id).is(":disabled")) {
-                        test(this.id, selector)
                         $(selector).addClass(addedClass);
+                        list.push(selector)
+                        button=this.id
                     }
                 });
         }
-        Checkclass()
+        Checkclass(list, button)
     
     }
     else if ($("#y-axis").is(":checked"))
@@ -168,12 +210,19 @@ $(document).on('click', ".board-tile", function() {
         } else {
             addedClass = "ship-clicked";
         }
-
+        list=[]
         for (let i = 0; i < shipSize; i++)
         {
             let selector = "#" + (parseInt(row) + i).toString() + col.toString();
-            $(selector).addClass(addedClass);
+            $('#ship-selector').children('button').each(function () {
+                if ($('#' + this.id).is(":disabled")) {
+                    $(selector).addClass(addedClass);
+                    list.push(selector)
+                    button=this.id
+                }
+            });
         }
+        Checkclass(list, button)
     }
 });
 
