@@ -1,18 +1,3 @@
-function checkIfLegal(origin, orientation, size)
-{
-    size = parseInt(size);
-    if (orientation == 'x')
-    {
-        // Check for bounds horizontally
-        return ((origin % 10) + size < 11);
-    }
-    else
-    {
-        // Check for bounds vertically
-        return ((Math.floor(origin / 10) + size < 11));
-    }
-}
-
 function getCells(cell, axis, size)
 {
     let cells = [];
@@ -39,10 +24,7 @@ function getCells(cell, axis, size)
         }
     }
 
-    if (cells.length == size)
-        return cells;
-    else
-        return false;
+    return cells;
 }
 
 function getShipSize()
@@ -54,7 +36,7 @@ function getShipSize()
         }
     });
 
-    return (shipSize);
+    return parseInt(shipSize);
 }
 
 // Selector button logic
@@ -73,29 +55,18 @@ $(document).on('mouseover', ".board-tile", function() {
     let axis = ($("#x-axis").is(":checked") ? 'x' : 'y');
     // Grab size from buttons
     let size = getShipSize();
+    // Grab occupied cells
+    let cells = getCells(cell, axis, size);
 
-    let isLegal = checkIfLegal(cell, axis, size);
-    let addedClass = isLegal ? 'ship-outline' : 'ship-outline-fail';
+    console.log(cells);
 
-    if (axis == 'x')
+    if (cells.length == size)
     {
-        // Show cells horizontally
-
         for (let i = 0; i < size; i++)
-        {
-            let adjCell = cell + i;
-            if ((adjCell % 10) >= cell % 10)
-                $("#" + adjCell).addClass(addedClass);
-        }
-    }
-    else
-    {
-        // Show cells vertically
+            $("#" + cells[i]).addClass("ship-outline");
+    } else {
         for (let i = 0; i < size; i++)
-        {
-            let adjCell = parseInt(cell) + parseInt(i)*10;
-            $("#" + adjCell).addClass(addedClass);
-        }
+            $("#" + cells[i]).addClass("ship-outline-fail");
     }
 });
 
@@ -112,7 +83,7 @@ $(document).on('click', ".board-tile", function() {
 
     let newShip = new Ship(shipSize, cells);
 
-    if (cells) {
+    if (cells && shipSize != 0) {
         if (player1.isTurn) {
             player1.ships.push(newShip);
         } else {
@@ -124,9 +95,11 @@ $(document).on('click', ".board-tile", function() {
     {
         for (let i = 0; i < cells.length; i++)
         {
+            // Add class to keep track of ships
             $("#" + newShip.cells[i]).addClass("ship-clicked");
         }
 
+        // Remove button from ship
         $("#btn" + shipSize).addClass("hide");
     }
 
