@@ -58,8 +58,6 @@ $(document).on('mouseover', ".board-tile", function() {
     // Grab occupied cells
     let cells = getCells(cell, axis, size);
 
-    console.log(cells);
-
     if (cells.length == size)
     {
         for (let i = 0; i < size; i++)
@@ -70,7 +68,7 @@ $(document).on('mouseover', ".board-tile", function() {
     }
 });
 
-// Keeping ships placed
+// Keeping ships placed and checking if turn is over
 $(document).on('click', ".board-tile", function() {
     // Grab cell number
     let cell = parseInt(this.id);
@@ -103,9 +101,16 @@ $(document).on('click', ".board-tile", function() {
         $("#btn" + shipSize).addClass("hide");
     }
 
-    console.log(cells);
-    console.log(newShip);
-    console.log(player1);
+    // Check if turn is over
+    let turnOver = false;
+    if (player1.isTurn && player1.ships.length == $(".selector-btn").length)
+        turnOver = true;
+    if (player2.isTurn && player2.ships.length == $(".selector-btn").length)
+        turnOver = true;
+
+    if (turnOver)
+        $("#end-turn").show();
+    console.log(turnOver);
 });
 
 // Remove classes on mouse leave
@@ -113,3 +118,12 @@ $(document).on('mouseleave', ".board-tile", function () {
     $(".board-tile").removeClass("ship-outline");
     $(".board-tile").removeClass("ship-outline-fail");
 });
+
+// Next placement button
+$(document).on('click', '#end-turn', function () {
+    if (player1.isTurn)
+        $("#player-1").hide(); $("#player-2").show();
+
+});
+
+

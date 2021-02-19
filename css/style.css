@@ -7,9 +7,6 @@
   margin-right: 5px;
 }
 
-#footer {
-}
-
 .hide {
   display: none;
 }
@@ -35,12 +32,6 @@
   margin: 0 auto;
 }
 
-/*
-td:hover {
-  background-color: darkgrey;
-}
-*/
-
 .ship-outline {
   background-color: #373737;
 }
@@ -57,4 +48,14 @@ td
 {
   height: 41px;
   width: 52px;
+}
+
+.hit 
+{
+  background-color: red;
+}
+
+.miss
+{
+  background-color: white;
 }
