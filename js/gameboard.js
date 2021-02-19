@@ -11,8 +11,13 @@ function removes_ship(spots, button, axis, origin){
                 
             }
             else{
-                add_ship_to_class(6, axis, origin)
-                $("#btn6").addClass('clicked')
+                if(overlap(spots)){
+                    
+                }
+                else{
+                    add_ship_to_class(6, axis, origin)
+                    $("#btn6").addClass('clicked')
+                }
             }
         }
     }
@@ -27,6 +32,7 @@ function removes_ship(spots, button, axis, origin){
                 
             }
             else{
+                
                 add_ship_to_class(5, axis, origin)
                 $("#btn5").addClass('clicked')
             }
@@ -102,6 +108,20 @@ function removes_ship(spots, button, axis, origin){
 function add_ship_to_class(size, axis, origin){
     let newShip = new Ship(size, axis, origin);//this.id is origin
     console.log(newShip);
+}
+
+function overlap(spots){
+    for(var x in spots){
+        if($(spots[x]).hasClass('ship-clicked')){
+            console.log($(spots[x]).hasClass('ship-clicked'))
+            lap=true
+        }
+        else{
+            lap=false
+        }
+    }
+    console.log(lap)
+    return lap
 }
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
