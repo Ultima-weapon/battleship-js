@@ -2,19 +2,21 @@
 function removes_ship(spots, button, axis, origin){
     if (button=='btn6'){
         if($("#btn6").hasClass('clicked')){
-            for(var x in spots){
-                $(spots[x]).removeClass("ship-clicked");
-            }
+            checkspots(spots)
         }
         else{
             if($('#'+origin).hasClass('ship-outline-fail')){
                 
             }
             else{
-                if(overlap(spots)){
-                    
-                }
+                if(overlap(spots)){//overlap keeps being true so ship never placed
+                    checkspots(spots)
+            }
                 else{
+                    for(var x in spots){
+                        $(spots[x]).addClass("unique");
+                        $(spots[x]).addClass("6");
+                    }
                     add_ship_to_class(6, axis, origin)
                     $("#btn6").addClass('clicked')
                 }
@@ -23,82 +25,117 @@ function removes_ship(spots, button, axis, origin){
     }
     else if (button=='btn5'){
         if($("#btn5").hasClass('clicked')){
-            for(var x in spots){
-                $(spots[x]).removeClass("ship-clicked");
-            }
+            checkspots(spots)
         }
         else{
             if($('#'+origin).hasClass('ship-outline-fail')){
                 
             }
             else{
-                
-                add_ship_to_class(5, axis, origin)
-                $("#btn5").addClass('clicked')
+                if(overlap(spots)){
+                    checkspots(spots)
+                }
+                else{
+                    for(var x in spots){
+                        $(spots[x]).addClass("unique");
+                        $(spots[x]).addClass("5");
+                    }
+                    add_ship_to_class(5, axis, origin)
+                    $("#btn5").addClass('clicked')
+                }
             }
         }
     }
     else if (button=='btn4'){
         if($("#btn4").hasClass('clicked')){
-            for(var x in spots){
-                $(spots[x]).removeClass("ship-clicked");
-            }
+            checkspots(spots)
+
         }
         else{
             if($('#'+origin).hasClass('ship-outline-fail')){
                 
             }
             else{
-                add_ship_to_class(4, axis, origin)
-                $("#btn4").addClass('clicked')
+                if(overlap(spots)){
+                    checkspots(spots)
+                }
+                else{
+                    for(var x in spots){
+                        $(spots[x]).addClass("unique");
+                        $(spots[x]).addClass("4");
+                    }
+                    add_ship_to_class(4, axis, origin)
+                    $("#btn4").addClass('clicked')
+                }
             }
         }
     }
     else if (button=='btn3'){
         if($("#btn3").hasClass('clicked')){
-            for(var x in spots){
-                $(spots[x]).removeClass("ship-clicked");
-            }
+            checkspots(spots)
         }
         else{
             if($('#'+origin).hasClass('ship-outline-fail')){
                 
             }
             else{
-                add_ship_to_class(3, axis, origin)
-                $("#btn3").addClass('clicked')
+                if(overlap(spots)){
+                    checkspots(spots)
+                }
+                else{
+                    for(var x in spots){
+                        $(spots[x]).addClass("unique");
+                        $(spots[x]).addClass("3");
+                    }
+                    add_ship_to_class(3, axis, origin)
+                    $("#btn3").addClass('clicked')
+                }
             }
         }
     }
     else if (button=='btn2'){
         if($("#btn2").hasClass('clicked')){
-            for(var x in spots){
-                $(spots[x]).removeClass("ship-clicked");
-            }
+            checkspots(spots)
         }
         else{
             if($('#'+origin).hasClass('ship-outline-fail')){
                 
             }
             else{
-                add_ship_to_class(2, axis, origin)
-                $("#btn2").addClass('clicked')
+                if(overlap(spots)){
+                    checkspots(spots)
+                }
+                else{
+                    for(var x in spots){
+                        $(spots[x]).addClass("unique");
+                        $(spots[x]).addClass("2");
+                    }
+                    add_ship_to_class(2, axis, origin)
+                    $("#btn2").addClass('clicked')
+                }
             }
         }
     }
     else if (button=='btn1'){
         if($("#btn1").hasClass('clicked')){
-            for(var x in spots){
-                $(spots[x]).removeClass("ship-clicked");
-            }
+            checkspots(spots)
         }
         else{
             if($('#'+origin).hasClass('ship-outline-fail')){
                 
             }
             else{
-                add_ship_to_class(1, axis, origin)
-                $("#btn1").addClass('clicked')
+                if(overlap(spots)){
+                    checkspots(spots)
+                }
+                else{
+                    for(var x in spots){
+                        $(spots[x]).addClass("unique");
+                        $(spots[x]).addClass("1");
+                    }
+                    add_ship_to_class(1, axis, origin)
+                    $("#btn1").addClass('clicked')
+                }
             }
         }
     }
@@ -112,17 +149,30 @@ function add_ship_to_class(size, axis, origin){
 
 function overlap(spots){
     for(var x in spots){
-        if($(spots[x]).hasClass('ship-clicked')){
-            console.log($(spots[x]).hasClass('ship-clicked'))
-            lap=true
+        if($(spots[x]).hasClass('unique')){
+            console.log('true')
+            return true
         }
         else{
             lap=false
+            console.log(lap)
         }
     }
-    console.log(lap)
     return lap
 }
+
+function checkspots(spots){
+    for(var x in spots){
+        if($(spots[x]).hasClass("6")||$(spots[x]).hasClass("5")||$(spots[x]).hasClass("4")
+        ||$(spots[x]).hasClass("3")||$(spots[x]).hasClass("2")||$(spots[x]).hasClass("1")){
+
+    }
+    else{
+        $(spots[x]).removeClass("ship-clicked");
+    }                    
+}
+}
+
 // Selector button logic
 $(document).on('click', ".selector-btn", function() {
     $('#ship-selector').children('button').each(function () {
