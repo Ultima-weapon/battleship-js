@@ -1,53 +1,38 @@
 class Ship
 {
-    constructor(size, orientation, origin) 
+    /**
+     * Constructs a Ship class with the size of the ship and the ID of the cells it occupies
+     * @param {number} size - the size of the Ship
+     * @param {Array} cells - the ID of the cells the Ship occupies
+     */
+    constructor(size, cells) 
     {
-        this.size = size;
-        this.origin = origin;
-        this.cells = [];
+        this.size = parseInt(size);
+        this.cells = cells;
         this.hits = [];
-        this.name = "";
-
-        switch(this.size)
-        {
-            case 1:
-                this.name = "Patrol Boat";
-                break;
-            case 2:
-                this.name = "Destroyer";
-                break;
-            case 3:
-                this.name = "Cruiser";
-                break;
-            case 4:
-                this.name = "Submarine";
-                break;
-            case 5:
-                this.name = "Battleship";
-                break;
-            case 6:
-                this.name = "Carrier";
-                break;
-        }
-
-        if (orientation == 'x')
-        {
-            for (let i = 0; i < size; i++)
-            {
-                this.cells.push(origin + i);
-            }
-        }
-        else if (orientation == 'y')
-        {
-            for (let i = 0; i < size; i++)
-            {
-                this.cells.push(origin + (i*10));
-            }
-        }
     }
 
+    /**
+     * Helper class that returns whether the ship has been sunk or not.
+     * @param None
+     * @returns Boolean - True if ship has been sunk, False is ship has not been sunk.
+     * @deprecated
+     */
     isSunk() 
     {
         return (this.hits.length == this.size);
+    }
+
+    /**
+     * Helper class that sets a cell of the ship to hit if it is one of the Ship's occupied cells.
+     * @param {number} hitCell 
+     * @deprecated
+     */
+    hit(hitCell)
+    {
+        for (cell in this.cells) {
+            if (hitCell == cell)
+                this.hits.push(hitCell);
+        }
     }
 };
