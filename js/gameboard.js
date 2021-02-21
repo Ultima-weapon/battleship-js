@@ -172,9 +172,14 @@ $(document).on('click', ".firing-tile", function() {
     if (enemyPlayer.board.cells[cell].occupied == true) {
         isAHit = true;
         enemyPlayer.board.cells[cell].hit = true;
-    } else if (!enemyPlayer.board.cells[cell].occupied == false) {
+        console.log('hit')
+    } else{
         isAHit = false;
         enemyPlayer.board.cells[cell].missed = true;
+        $("#axis-controls").toggle(function () {
+            $("#end-turn").fadeIn(400);
+            $('#end-turn').trigger('click');
+        });
     }
 
     enemyPlayer.board.cells[cell].hit = isAHit;
