@@ -70,6 +70,14 @@ class Game
         else
             return this.players[1];
     }
+
+    otherPlayer()
+    {
+        if (this.players[0].isTurn)
+        return this.players[1];
+    else
+        return this.players[0];
+    }
 };
 
 /**
@@ -130,13 +138,11 @@ $(document).on('click', '#end-turn', function () {
     game.switchPlayer();
 
     // Hide the board
-    $("#board").slideUp(400);
-
-
-
-    // Redraw the board with the next players information
-    let player = game.currentPlayer();
-    redrawBoard(player);
+    $("#board").slideUp(400, function() {
+        // Redraw the board with the next players information
+        let player = game.currentPlayer();
+        redrawBoard(player);
+    });
 
     // Show the board
     $("#board").slideDown(400);

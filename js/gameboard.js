@@ -159,6 +159,30 @@ $(document).on('mouseleave', ".board-tile", function () {
     $(".board-tile").removeClass("ship-outline-fail");
 });
 
+// Firing at enemy board
+$(document).on('click', ".firing-tile", function() {
+    let cell = parseInt(this.id);
 
+    let enemyPlayer = game.otherPlayer();
+
+    console.log(enemyPlayer);
+
+
+    let isAHit = false;
+    if (enemyPlayer.board.cells[cell].occupied == true) {
+        isAHit = true;
+        enemyPlayer.board.cells[cell].hit = true;
+    } else if (!enemyPlayer.board.cells[cell].occupied == false) {
+        isAHit = false;
+        enemyPlayer.board.cells[cell].missed = true;
+    }
+
+    enemyPlayer.board.cells[cell].hit = isAHit;
+    enemyPlayer.board.cells[cell].missed = !isAHit;
+
+
+    //$("#firing-board").find("#" + cell).addClass("hit");
+    redrawFiringBoard(enemyPlayer);
+});
 
 

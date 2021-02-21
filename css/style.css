@@ -57,15 +57,9 @@ td
 
 .miss
 {
-  background-color: white;
+  background-color: blue;
 }
 
-#board
-{
-  width: 50%;
+#board {
   margin: 0 auto;
-}
-
-table {
-  margin-right: 3%;
 }

@@ -38,4 +38,31 @@ function redrawBoard(player)
         $("#" + i).removeClass("hit");
         $("#" + i).removeClass("miss");
     }
+
+    for (let i = 0; i < 100; i++) {
+        if (player.board.cells[i].hit) {
+            $("#" + i).addClass("hit");
+        } else if (player.board.cells[i].miss) {
+            $("#" + i).addClass("miss");
+        } else if (player.board.cells[i].occupied) {
+            $("#" + i).addClass("ship-clicked");
+        }
+    }
+}
+
+// Redraws the firing board with the information from another player
+function redrawFiringBoard(player)
+{
+    console.log("Redrawing firing board...");
+    for (let i = 0; i < 100; i++) {
+        $("#firing-board").find("#" + i).removeClass("hit");
+        $("#firing-board").find("#" + i).removeClass("miss");
+    }
+    for (let i = 0; i < 100; i++) {
+        if (player.board.cells[i].hit == true) {
+            $("#firing-board").find("#" + i).addClass("hit");
+        } else if (player.board.cells[i].missed == true) {
+            $("#firing-board").find("#" + i).addClass("miss");
+        }
+    }
 }

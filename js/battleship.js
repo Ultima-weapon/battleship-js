@@ -20,7 +20,7 @@ function addButtons(numberOfShips)
 function generateBoard()
 {
     let cellNo = 0;
-    $("#board").append("<table id='game-board' class='table is-bordered is-fullwidth has-text-centered'></table>");
+    $("#board").append("<table id='game-board' class='table is-bordered is-fullwidth has-text-centered column'></table>");
     for (let i = 0; i < 11; i++) {
         $("#game-board").append("<tr id='row-" + i + "'></tr>");
         for (var j = 0; j < 11; j++) {
@@ -41,22 +41,23 @@ function generateBoard()
     console.log("Finished generating board.");
 }
 
+// Dynamically assigns the firing board to the DOM
 function generateFiringBoard()
 {
     let cellNo = 0;
-    $("#board").append("<table id='firing-board' class='table is-bordered is-fullwidth has-text-centered'></table>")
+    $("#board").append("<table id='firing-board' class='table is-bordered is-fullwidth has-text-centered column'></table>")
     for (let i = 0; i < 11; i++) {
-        $("#game-board").append("<tr id='row-" + i + "'></tr>")
+        $("#firing-board").append("<tr id='f-row-" + i + "'></tr>")
         for (let j = 0; j < 11; j++) {
             if (i == 0 && j == 0)
             {
-                $("#row-" + i).append("<th id='origin'></th>");
+                $("#f-row-" + i).append("<th id='origin'></th>");
             } else if (i == 0) {
-                $("#row-" + i).append("<th>" + j + "</th>");
+                $("#f-row-" + i).append("<th>" + j + "</th>");
             } else if (j == 0) {
-                $("#row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() + "</th>");
+                $("#f-row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() + "</th>");
             } else {
-                $("#row-" + i).append("<td id='" + cellNo + "' class='board-tile'>" + cellNo + "</td>");
+                $("#f-row-" + i).append("<td id='" + cellNo + "' class='firing-tile'>" + cellNo + "</td>");
                 cellNo++;
             }
         }
