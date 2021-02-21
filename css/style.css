@@ -65,3 +65,7 @@ td
   width: 50%;
   margin: 0 auto;
 }
+
+table {
+  margin-right: 3%;
+}
