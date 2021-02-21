@@ -70,6 +70,14 @@ class Game
         else
             return this.players[1];
     }
+
+    otherPlayer()
+    {
+        if (this.players[0].isTurn)
+        return this.players[1];
+    else
+        return this.players[0];
+    }
 };
 
 /**
@@ -118,18 +126,23 @@ $(document).on('click', '#end-turn', function () {
     // Hide end turn button
     $("#end-turn").slideUp(400);
 
+    if (game.state == 1 && game.players[0].isTurn) {
+        resetBoardControls();
+    } else if (game.state == 1 && game.players[1].isTurn) {
+        game.state = 2;
+        console.log("Advance game state.");
+        generateFiringBoard();
+    }
+
     // Change whose turn it is
     game.switchPlayer();
 
     // Hide the board
-    $("#board").slideUp(400);
-
-    if (game.state == 1)
-        resetBoardControls();
-
-    // Redraw the board with the next players information
-    let player = game.currentPlayer();
-    redrawBoard(player);
+    $("#board").slideUp(400, function() {
+        // Redraw the board with the next players information
+        let player = game.currentPlayer();
+        redrawBoard(player);
+    });
 
     // Show the board
     $("#board").slideDown(400);
