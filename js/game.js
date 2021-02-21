@@ -71,10 +71,14 @@ function resetBoardControls()
         $("#" + this.id).removeClass("hide");
         $("#" + this.id).attr("disabled", false);
     });
+
+    $('#axis-controls').show();
 }
 
 // End Turn button
 $(document).on('click', '#end-turn', function () {
+    console.log(game);
+
     // Hide end turn button
     $("#end-turn").slideUp(400);
 
@@ -82,12 +86,15 @@ $(document).on('click', '#end-turn', function () {
     game.switchPlayer();
 
     // Hide the board
-    $("#board-space").slideUp(400);
+    $("#board").slideUp(400);
+
+    if (game.state == 1)
+        resetBoardControls();
 
     // Redraw the board with the next players information
     let player = game.currentPlayer();
     redrawBoard(player);
 
     // Show the board
-    $("#board-space").slideDown(400);
+    $("#board").slideDown(400);
 });
