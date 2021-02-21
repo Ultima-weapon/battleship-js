@@ -1,3 +1,9 @@
+/**
+ * Gets the adjacent cells when hovering or placing ships in the initial phase of the game.
+ * @param {number} cell - The HTML ID of the origin cell
+ * @param {char} axis - The axis of orientation. 'x' or 'y'
+ * @param {number} size - The size of the ship currently selected.
+ */
 function getCells(cell, axis, size)
 {
     let cells = [];
@@ -27,6 +33,10 @@ function getCells(cell, axis, size)
     return cells;
 }
 
+/**
+ * Returns the size of the currently selected ship button on the page.
+ * @returns {number} - (Integer) the size of the ship
+ */
 function getShipSize()
 {
     let shipSize = 0;
@@ -39,6 +49,10 @@ function getShipSize()
     return parseInt(shipSize);
 }
 
+/**
+ * Gets the currently selected axis of orientation on the page.
+ * @returns {char} - 'x' or 'y'
+ */
 function getAxis()
 {
     return ($("#x-axis").is(":checked") ? 'x' : 'y');
@@ -84,6 +98,7 @@ $(document).on('mouseover', ".board-tile", function() {
     }
 });
 
+// Placement of ships
 $(document).on('click', ".board-tile", function() {
     let player = game.currentPlayer();
 

@@ -1,5 +1,8 @@
-
-
+/**
+ * Adds ship placement buttons for placing of different sized ships.
+ * @param {number} numberOfShips 
+ * @returns None
+ */
 function addButtons(numberOfShips)
 {
     for (i = 0; i < numberOfShips; i++)
@@ -9,6 +12,11 @@ function addButtons(numberOfShips)
     }
 }
 
+/**
+ * Dynamically generates the HTML for the display of the board
+ * @param None
+ * @returns None
+ */
 function generateBoard()
 {
     let cellNo = 0;

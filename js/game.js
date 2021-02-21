@@ -1,5 +1,10 @@
 class Game
 {
+    /**
+     * Creates the over-arching Game object responsible for managing most aspects of the game.
+     * @constructor
+     * @param {Array[Players]} players - array of Players to start the Game with.
+     */
     constructor(players)
     {
         // States
@@ -13,27 +18,51 @@ class Game
         console.log("Game class initialized and in state " + this.state);
     }
 
+    /**
+     * Sets the numberOfShips variable which is integral for turn checking during the placement phase of the game.
+     * @param {number} num - Number of ships each player should have
+     */
     setNumberOfShips(num)
     {
         this.numberOfShips = num;
     }
 
+    /**
+     * Gets the number of ships player's are allowed to place.
+     * @param None
+     * @returns {number} - the number of ships player's are allowed to place.
+     */
     getNumberOfShips()
     {
         return this.numberOfShips;
     }
 
+    /**
+     * Returns the current state of the game.
+     * @params None
+     * @returns {number} - The current state of the game: 1, the placement phase. 2, the firing phase. 3, win condition has been met.
+     */
     getState()
     {
         return this.state;
     }
 
+    /**
+     * Changes which player is currently active. Used for ending of turns.
+     * @params None
+     * @returns None
+     */
     switchPlayer()
     {
         this.players[0].isTurn = !this.players[0].isTurn;
         this.players[1].isTurn = !this.players[1].isTurn;
     }
 
+    /**
+     * Returns the Player object of the currently active player.
+     * @params None
+     * @returns {Player} - the currently active Player object
+     */
     currentPlayer()
     {
         if (this.players[0].isTurn)
@@ -42,6 +71,21 @@ class Game
             return this.players[1];
     }
 };
+
+/**
+ * Resets the ship placement buttons for player 2 to place ships
+ * @params None
+ * @returns None
+ */
+function resetBoardControls()
+{
+    $('#ship-selector').children('button').each(function () {
+        $("#" + this.id).removeClass("hide");
+        $("#" + this.id).attr("disabled", false);
+    });
+
+    $('#axis-controls').show();
+}
 
 // Start game button
 $("#btn-start-game").click(function() {
@@ -65,15 +109,7 @@ $("#btn-start-game").click(function() {
 
 game = new Game([player1, player2]);
 
-function resetBoardControls()
-{
-    $('#ship-selector').children('button').each(function () {
-        $("#" + this.id).removeClass("hide");
-        $("#" + this.id).attr("disabled", false);
-    });
 
-    $('#axis-controls').show();
-}
 
 // End Turn button
 $(document).on('click', '#end-turn', function () {
