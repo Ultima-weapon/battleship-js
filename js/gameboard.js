@@ -173,7 +173,11 @@ $(document).on('click', ".firing-tile", function() {
         isAHit = true;
         enemyPlayer.board.cells[cell].hit = true;
         console.log('hit')
-    } else{
+    }
+    else if(enemyPlayer.board.cells[cell].missed==true){
+        
+    }
+    else{
         isAHit = false;
         enemyPlayer.board.cells[cell].missed = true;
         $("#axis-controls").toggle(function () {

@@ -146,4 +146,6 @@ $(document).on('click', '#end-turn', function () {
 
     // Show the board
     $("#board").slideDown(400);
+    let cPlayer=game.otherPlayer();
+    redrawFiringBoard(cPlayer);
 });
