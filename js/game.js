@@ -78,6 +78,25 @@ class Game
     else
         return this.players[0];
     }
+
+    checkWinCondition(player)
+    {
+        // Get number of occupied cells
+        let occupiedCells = 0;
+        let hitCells = 0;
+        for (let i = 0; i < 100; i++) {
+            if (player.board.cells[i].occupied == true)
+                occupiedCells++;
+
+            if (player.board.cells[i].hit == true)
+                hitCells++;
+        }
+
+        console.log("Occupied: " + occupiedCells);
+        console.log("Hit: " + hitCells);
+
+        return (occupiedCells == hitCells)
+    }
 };
 
 /**

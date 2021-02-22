@@ -189,40 +189,8 @@ $(document).on('click', ".firing-tile", function() {
     enemyPlayer.board.cells[cell].hit = isAHit;
     enemyPlayer.board.cells[cell].missed = !isAHit;
 
-
-
-    let numberOfShips = parseInt($("#no-of-ships").val());
-    count=1;
-    for (let i = 0; i < 100; i++) {//
-        if($("#firing-board").find("#" + i).hasClass("hit")){
-            count++;
-        }
-    }
-    if(numberOfShips==1){
-        if(count==1){
-            alert('winner')
-        }
-    }else if(numberOfShips==2){
-        if(count==3){
-            alert('winner')
-        }
-    }else if(numberOfShips==3){
-        if(count==6){
-            alert('winner')
-        }
-    }else if(numberOfShips==4){
-        if(count==10){
-            alert('winner')
-        }
-    }else if(numberOfShips==5){
-        if(count==15){
-            alert('winner')
-        }
-    }else if(numberOfShips==6){
-        if(count==21){
-            alert('winner')
-        }
-    }
+    if (game.checkWinCondition(enemyPlayer))
+        alert("Winner");
     //$("#firing-board").find("#" + cell).addClass("hit");
     redrawFiringBoard(enemyPlayer);
 });
