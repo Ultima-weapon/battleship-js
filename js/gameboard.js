@@ -189,8 +189,22 @@ $(document).on('click', ".firing-tile", function() {
     enemyPlayer.board.cells[cell].hit = isAHit;
     enemyPlayer.board.cells[cell].missed = !isAHit;
 
-    if (game.checkWinCondition(enemyPlayer))
-        alert("Winner");
+    console.log(game.checkWinCondition(enemyPlayer));
+
+    if (game.checkWinCondition(enemyPlayer)) {
+        game.state = 3;
+
+        $("#board-space").slideUp(1000, function() {
+            if (game.players[0].isTurn)
+            {
+                $("#player-winner").text("Player 1 Wins!");
+            } else {
+                $("#player-winner").text("Player 2 Wins!");
+            }
+
+            $("#win-screen").slideDown(1000);
+        });
+    }
     //$("#firing-board").find("#" + cell).addClass("hit");
     redrawFiringBoard(enemyPlayer);
 });
