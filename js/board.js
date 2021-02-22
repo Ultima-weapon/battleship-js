@@ -54,7 +54,11 @@ function redrawBoard(player)
 function redrawFiringBoard(player)
 {
     console.log("Redrawing firing board...");
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 100; i++) {//
+        if($("#firing-board").find("#" + i).hasClass("hit")){
+            count++;
+            console.log(count)
+        }
         $("#firing-board").find("#" + i).removeClass("hit");
         $("#firing-board").find("#" + i).removeClass("miss");
     }
