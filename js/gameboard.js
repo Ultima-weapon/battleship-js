@@ -167,6 +167,7 @@ $(document).on('click', ".firing-tile", function() {
 
     console.log(enemyPlayer);
 
+
     let isAHit = false;
     if (enemyPlayer.board.cells[cell].occupied == true) {
         isAHit = true;
@@ -187,6 +188,8 @@ $(document).on('click', ".firing-tile", function() {
 
     enemyPlayer.board.cells[cell].hit = isAHit;
     enemyPlayer.board.cells[cell].missed = !isAHit;
+
+    console.log(game.checkWinCondition(enemyPlayer));
 
     if (game.checkWinCondition(enemyPlayer)) {
         game.state = 3;

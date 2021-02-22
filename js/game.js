@@ -157,20 +157,14 @@ $(document).on('click', '#end-turn', function () {
     game.switchPlayer();
 
     // Hide the board
-    $("#board-space").slideUp(400, function() {
+    $("#board").slideUp(400, function() {
         // Redraw the board with the next players information
         let player = game.currentPlayer();
         redrawBoard(player);
-
-        $("#hide-screen").fadeIn(2500, function() {
-            $("#hide-screen").fadeOut(2500, function() {
-                // Show the board
-                $("#board-space").slideDown(1000);
-            });
-        });
     });
 
-
+    // Show the board
+    $("#board").slideDown(400);
     let cPlayer=game.otherPlayer();
     redrawFiringBoard(cPlayer);
 });
