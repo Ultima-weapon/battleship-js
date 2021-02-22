@@ -203,23 +203,23 @@ $(document).on('click', ".firing-tile", function() {
             alert('winner')
         }
     }else if(numberOfShips==2){
-        if(count==2){
+        if(count==3){
             alert('winner')
         }
     }else if(numberOfShips==3){
-        if(count==5){
+        if(count==6){
             alert('winner')
         }
     }else if(numberOfShips==4){
-        if(count==9){
+        if(count==10){
             alert('winner')
         }
     }else if(numberOfShips==5){
-        if(count==14){
+        if(count==15){
             alert('winner')
         }
     }else if(numberOfShips==6){
-        if(count==20){
+        if(count==21){
             alert('winner')
         }
     }
