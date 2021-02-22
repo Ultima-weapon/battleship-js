@@ -192,7 +192,7 @@ $(document).on('click', ".firing-tile", function() {
 
 
     let numberOfShips = parseInt($("#no-of-ships").val());
-    count=0;
+    count=1;
     for (let i = 0; i < 100; i++) {//
         if($("#firing-board").find("#" + i).hasClass("hit")){
             count++;
