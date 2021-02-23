@@ -20,7 +20,8 @@ function addButtons(numberOfShips)
 function generateBoard()
 {
     let cellNo = 0;
-    $("#board").append("<table id='game-board' class='table is-bordered is-fullwidth has-text-centered column'></table>");
+    /* TODO: This is not readable */
+    $("#board").append("<table id='game-board' class='table center is-bordered is-fullwidth has-text-centered column'></table>");
     for (let i = 0; i < 11; i++) {
         $("#game-board").append("<tr id='row-" + i + "'></tr>");
         for (var j = 0; j < 11; j++) {
