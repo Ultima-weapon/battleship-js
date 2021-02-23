@@ -1,3 +1,4 @@
 #!/bin/bash
-docker rm -f battleship-js
-docker run -dit --name battleship-js -p 8084:80 -v $(pwd)/../:/usr/local/apache2/htdocs/ httpd:2.4
+docker stop battleship-js
+docker rm battleship-js
+docker run -dit --rm --name battleship-js -p 8084:80 -v /home/$USER/Documents/battleship-js:/usr/local/apache2/htdocs/ httpd:2.4
