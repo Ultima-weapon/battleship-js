@@ -12,6 +12,8 @@ class Game
         // 2 = Firing
         // 3 = Game Over
         this.state = 1;
+        this.type = 1;
+        this.difficulty = 0;
         this.players = players;
         this.numShips = 0;
 
@@ -113,6 +115,43 @@ function resetBoardControls()
 
     $('#axis-controls').show();
 }
+game = new Game([player1, player2]);
+
+// Start game button
+$("#btn-single").click(function() {
+
+    $("#start-game").hide();
+    $("#difficulty-selector").slideDown(400);
+});
+
+$("#btn-easy").click(function() {
+    
+    game.players = [player1, aiEasy];
+    $("#difficulty-selector").hide();
+    $("#pick-ship-number").slideDown(400);
+});
+
+
+$("#btn-medium").click(function() {
+    
+    game.players = [player1, aiMedium];
+    $("#difficulty-selector").hide();
+    $("#pick-ship-number").slideDown(400);
+});
+
+$("#btn-hard").click(function() {
+    
+    game.players = [player1, aiHard];
+    $("#difficulty-selector").hide();
+    $("#pick-ship-number").slideDown(400);
+});
+
+// Start game button
+$("#btn-multi").click(function() {
+    game.players = [player1, player2];
+    $("#start-game").hide();
+    $("#pick-ship-number").slideDown(400);
+});
 
 // Start game button
 $("#btn-start-game").click(function() {
@@ -133,8 +172,6 @@ $("#btn-start-game").click(function() {
     game.numShips = numberOfShips;
     console.log(game);
 });
-
-game = new Game([player1, player2]);
 
 
 

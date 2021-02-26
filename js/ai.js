@@ -1,4 +1,4 @@
-class ai extends player
+class Ai extends Player
 {
     /**
      * Constructs a blank ai class and attaches a Board object.
@@ -10,8 +10,8 @@ class ai extends player
     constructor(playerID, board, difficulty)
     {
         // Calls contructor from Player Class
-        this.difficulty = difficulty;
         super(playerID, board);
+        this.difficulty = difficulty;
     }
 
     /**
@@ -47,3 +47,7 @@ class ai extends player
         }
     }
 };
+
+let aiEasy = new Ai(2, player2Board, 1);
+let aiMedium = new Ai(2, player2Board, 2);
+let aiHard = new Ai(2, player2Board, 3);
