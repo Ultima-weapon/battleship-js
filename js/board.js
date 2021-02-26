@@ -21,8 +21,9 @@ class Board
     constructor()
     {
         this.cells = Array(100);
-        for (let i = 0; i < 100; i++)
+        for (let i = 0; i < 100; i++){
             this.cells[i] = new Cell();
+        }
     }
 };
 

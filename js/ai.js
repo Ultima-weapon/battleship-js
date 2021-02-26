@@ -14,6 +14,10 @@ class ai extends player
         super(playerID, board);
     }
 
+    /**
+     * Calls a seperate move function depending on the difficulty of the Ai
+     * @param {Board} opponentBoard - the current Board of the Opponent
+     */
     move(opponentBoard)
     {
         switch(this.difficulty){
@@ -24,11 +28,22 @@ class ai extends player
                 // This is Medium Mode
                 break;
             case 3:
-                // This is Hard Mode
+                moveHard(opponentBoard);
                 break;
             default:
                 // Invalid Difficulty Setting
-                
+
+        }
+    }
+
+    moveHard(opponentBoard)
+    {
+        // Finds next ship to hit
+        for (let i = 0; i < 100; i++){
+            let currentCell = opponentBoard.cells[i];
+            if(currentCell.occupied && !currentCell.hit){
+                $("#\\" + (31+i)).click();
+            }
         }
     }
 };
