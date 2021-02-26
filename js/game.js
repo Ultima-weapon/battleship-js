@@ -12,7 +12,7 @@ class Game
         // 2 = Firing
         // 3 = Game Over
         this.state = 1;
-        this.type = 1;
+        this.type = 0;
         this.difficulty = 0;
         this.players = players;
         this.numShips = 0;
@@ -119,7 +119,7 @@ game = new Game([player1, player2]);
 
 // Start game button
 $("#btn-single").click(function() {
-
+    game.type = 1;
     $("#start-game").hide();
     $("#difficulty-selector").slideDown(400);
 });
@@ -148,6 +148,7 @@ $("#btn-hard").click(function() {
 
 // Start game button
 $("#btn-multi").click(function() {
+    game.type = 2;
     game.players = [player1, player2];
     $("#start-game").hide();
     $("#pick-ship-number").slideDown(400);
@@ -198,6 +199,11 @@ $(document).on('click', '#end-turn', function () {
         // Redraw the board with the next players information
         let player = game.currentPlayer();
         redrawBoard(player);
+        console.log(player);
+        if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
+            setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, 7000);
+        }
+
 
         $("#hide-screen").fadeIn(2500, function() {
             $("#hide-screen").fadeOut(2500, function() {
