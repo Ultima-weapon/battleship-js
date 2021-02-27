@@ -168,25 +168,19 @@ $(document).on('click', ".firing-tile", function() {
     console.log(enemyPlayer);
 
     let isAHit = false;
+
     if (enemyPlayer.board.cells[cell].occupied == true) {
         isAHit = true;
-        enemyPlayer.board.cells[cell].hit = true;
         console.log('hit')
-    }
-    else if(enemyPlayer.board.cells[cell].missed==true){
-        
-    }
-    else{
-        isAHit = false;
-        enemyPlayer.board.cells[cell].missed = true;
-        $("#axis-controls").toggle(function () {
-            $("#end-turn").fadeIn(400);
-            $('#end-turn').trigger('click');
-        });
     }
 
     enemyPlayer.board.cells[cell].hit = isAHit;
     enemyPlayer.board.cells[cell].missed = !isAHit;
+
+    $("#axis-controls").toggle(function () {
+            $("#end-turn").fadeIn(400);
+            $('#end-turn').trigger('click');
+    });
 
     if (game.checkWinCondition(enemyPlayer)) {
         game.state = 3;
