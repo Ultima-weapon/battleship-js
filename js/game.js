@@ -195,7 +195,8 @@ $(document).on('click', '#end-turn', function () {
     game.switchPlayer();
 
     // Hide the board
-    $("#board-space").slideUp(400, function() {
+    setTimeout(() => { 
+        $("#board-space").slideUp(400, function() {
         // Redraw the board with the next players information
         let player = game.currentPlayer();
         redrawBoard(player);
@@ -211,9 +212,10 @@ $(document).on('click', '#end-turn', function () {
                 $("#board-space").slideDown(1000);
             });
         });
-    });
+        })
 
 
-    let cPlayer=game.otherPlayer();
-    redrawFiringBoard(cPlayer);
+        let cPlayer=game.otherPlayer();
+        redrawFiringBoard(cPlayer);
+    }, 2000);
 });
