@@ -2,38 +2,43 @@
 <html lang="en-us">
     <head>
         <title>Battleship.js</title>
-
-        <link href="css/bulma.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <!-- style sheets -->
+        <link rel="stylesheet/less" type="text/css" href="css/bulma.css" >
+        <!-- link href="css/style.css" rel="stylesheet" -->
+        <link rel="stylesheet/less" type="text/css" href="css/style.less">
+        <script src="http://cdn.jsdelivr.net/npm/less@3.13/dist/less.js" ></script>
     </head>
 
     <body>
 
         <!-- Heading -->
-        <div id="header" class="container has-text-centered">
-            <h1 class="is-size-1">Battleship.js</h1>
-            <h2 class="is-size-4">The classic game in your browser</h2>
+        <div id="header" class="title-header">
+            <h1 class="title">Battleship.js</h1>
+            <h2 class="subtitle">The classic game in your browser</h2>
         </div>
 
         <!-- Board Space -->
-        <div id="board-space" class="container start-game">
-            <div id="start-game" class="has-text-centered">
+        <div id="board-space" class="container">
+            <div id="start-game" class="start-game">
                 <p>Click the Start button to begin!</p>
-                <p id="no-of-ships-err" class="has-text-danger hide">Please input an integer between 1 and 6.</p>
+                <p id="no-of-ships-err" class="error-msg">Please input an integer between 1 and 6.</p>
                 <label class="label">Number of ships:</label>
-                <div class="field has-addons has-addons-centered">
-                    <div class="control">
+
+                <div class="input-dialouge">
+                    <div class="input-control">
                         <input id="no-of-ships" name="no-of-ships" class="input" type="text" placeholder="1-6">
                     </div>
-                    <div class="control">
-                        <button id="btn-start-game" class="button is-success">
+                    <div class="input-control">
+                        <button id="btn-start-game" class="ships-submit">
                         Start!
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div id="placement-options" class="hide has-text-centered">
+            <div id="board" class="board"></div>
+
+            <div id="placement-options" class="placement-options">
                 <div id="axis-controls" class="is-grouped">
                     <label for="x-axis">X-Axis</label>
                     <input name="axis" class="radio" id="x-axis" type="radio" checked>
@@ -42,33 +47,25 @@
                     <input name="axis" class="radio" id="y-axis" type="radio">
                 </div>
     
-                <div id="ship-selector" class="is-grouped">
-        
-                </div>
+                <div id="ship-selector" class="is-grouped"></div>
 
-                <button id="end-turn" class="button is-danger hide">End Turn</button>
+                <button id="end-turn" class="end-turn">End Turn</button>
             </div>
-
-            <div id="board" class="container columns">
-
-            </div>
-
-
         </div>
 
         <!-- Hide Screen -->
-        <div id="hide-screen" class="container has-text-centered hide">
+        <div id="hide-screen" class="hide-screen">
             <h1 class="is-size-1">No peeking!</h1>
         </div>
 
         <!-- Win Screen -->
-        <div id="win-screen" class="container has-text-centered hide">
+        <div id="win-screen" class="win-screen">
             <h1 class="is-size-1">Winner!</h1>
             <p id="player-winner"></p>
         </div>
 
         <!-- Footer -->
-        <footer id="footer" class="container has-text-centered">
+        <footer id="footer" class="footer">
             <p>&copy; Best Programming Group 2021</p>
         </footer>
 
@@ -85,3 +82,4 @@
         </script>
     </body>
 </html>
+
