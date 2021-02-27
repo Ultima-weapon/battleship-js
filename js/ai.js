@@ -26,7 +26,6 @@ class Ai extends Player
             if(currentCell.occupied && !currentCell.hit){
                 console.log("Clicked on " + (30+i));
                 $("#\\" + (30+i)).click();
-                break;
             }
         }
     }
