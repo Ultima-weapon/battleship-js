@@ -7,7 +7,7 @@ function addButtons(numberOfShips)
 {
     for (i = 0; i < numberOfShips; i++)
     {
-        var btnHTML = '<button id="btn' + (i+1) + '" class="ship-selector selector-btn">1 x ' + (i + 1) + '</button>';
+        var btnHTML = '<button id="btn' + (i+1) + '" class="button is-success selector-btn">1 x ' + (i + 1) + '</button>';
         $("#ship-selector").append(btnHTML)
     }
 }
@@ -20,7 +20,7 @@ function addButtons(numberOfShips)
 function generateBoard()
 {
     let cellNo = 0;
-    $("#board").append("<table id='game-board' class='generated-board'></table>");
+    $("#board").append("<table id='game-board' class='table is-bordered is-fullwidth has-text-centered column'></table>");
     for (let i = 0; i < 11; i++) {
         $("#game-board").append("<tr id='row-" + i + "'></tr>");
         for (var j = 0; j < 11; j++) {
@@ -45,7 +45,7 @@ function generateBoard()
 function generateFiringBoard()
 {
     let cellNo = 0;
-    $("#board").append("<table id='firing-board' class='generated-board'></table>")
+    $("#board").append("<table id='firing-board' class='table is-bordered is-fullwidth has-text-centered column'></table>")
     for (let i = 0; i < 11; i++) {
         $("#firing-board").append("<tr id='f-row-" + i + "'></tr>")
         for (let j = 0; j < 11; j++) {
