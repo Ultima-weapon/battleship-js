@@ -45,7 +45,7 @@ function generateBoard()
 function generateFiringBoard()
 {
     let cellNo = 0;
-    $("#board").append("<table id='firing-board' class='generated-board'></table>")
+    $("#board").prepend("<table id='firing-board' class='generated-board'></table>")
     for (let i = 0; i < 11; i++) {
         $("#firing-board").append("<tr id='f-row-" + i + "'></tr>")
         for (let j = 0; j < 11; j++) {

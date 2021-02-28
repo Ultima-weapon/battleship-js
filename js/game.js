@@ -162,6 +162,9 @@ $(document).on('click', '#end-turn', function () {
         let player = game.currentPlayer();
         redrawBoard(player);
 
+        let cPlayer=game.otherPlayer();
+        redrawFiringBoard(cPlayer);
+
         $("#hide-screen").fadeIn(2500, function() {
             $("#hide-screen").fadeOut(2500, function() {
                 // Show the board
@@ -171,6 +174,4 @@ $(document).on('click', '#end-turn', function () {
     });
 
 
-    let cPlayer=game.otherPlayer();
-    redrawFiringBoard(cPlayer);
 });

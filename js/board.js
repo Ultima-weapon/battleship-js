@@ -34,18 +34,18 @@ class Board
 function redrawBoard(player)
 {
     for (let i = 0; i < 100; i++) {
-        $("#" + i).removeClass("ship-clicked");
-        $("#" + i).removeClass("hit");
-        $("#" + i).removeClass("miss");
+        $("#game-board").find("#" + i).removeClass("hit");
+        $("#game-board").find("#" + i).removeClass("miss");
+        $("#game-board").find("#" + i).removeClass("ship-clicked");
     }
 
     for (let i = 0; i < 100; i++) {
         if (player.board.cells[i].hit) {
-            $("#" + i).addClass("hit");
+            $("#game-board").find("#" + i).addClass("hit");
         } else if (player.board.cells[i].miss) {
-            $("#" + i).addClass("miss");
+            $("#game-board").find("#" + i).addClass("miss");
         } else if (player.board.cells[i].occupied) {
-            $("#" + i).addClass("ship-clicked");
+            $("#game-board").find("#" + i).addClass("ship-clicked");
         }
     }
 }
@@ -63,6 +63,7 @@ function redrawFiringBoard(player)
         */
         $("#firing-board").find("#" + i).removeClass("hit");
         $("#firing-board").find("#" + i).removeClass("miss");
+        $("#firing-board").find("#" + i).removeClass("ship-clicked");
     }
     for (let i = 0; i < 100; i++) {
         if (player.board.cells[i].hit == true) {
