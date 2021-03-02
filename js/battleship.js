@@ -5,9 +5,10 @@
  */
 function addButtons(numberOfShips)
 {
+    console.log("Add buttons")
     for (i = 0; i < numberOfShips; i++)
     {
-        var btnHTML = '<button id="btn' + (i+1) + '" class="button is-success selector-btn">1 x ' + (i + 1) + '</button>';
+        let btnHTML = '<button id="btn' + (i+1) + '" class="button is-success selector-btn">1 x ' + (i + 1) + '</button>';
         $("#ship-selector").append(btnHTML)
     }
 }
@@ -23,14 +24,14 @@ function generateBoard()
     $("#board").append("<table id='game-board' class='table is-bordered is-fullwidth has-text-centered column'></table>");
     for (let i = 0; i < 11; i++) {
         $("#game-board").append("<tr id='row-" + i + "'></tr>");
-        for (var j = 0; j < 11; j++) {
+        for (let j = 0; j < 11; j++) {
             if (i == 0 && j == 0)
             {
-                $("#row-" + i).append("<th id='origin'></th>");
+                $("#row-" + i).append("<th id='origin'></th>"); //affects top row
             } else if (i == 0) {
-                $("#row-" + i).append("<th>" + j +"</th>")
+                $("#row-" + i).append("<th>" + j +"</th>") //affects 0-10
             } else if (j == 0) {
-                $("#row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() +"</th>")
+                $("#row-" + i).append("<th>" + String.fromCharCode(96 + i).toUpperCase() +"</th>") //affects A-Z
             } else {
                 $("#row-" + i).append("<td id='" + cellNo + "' class='board-tile'>" + cellNo + "</td>");
                 cellNo++;
@@ -44,6 +45,7 @@ function generateBoard()
 // Dynamically assigns the firing board to the DOM
 function generateFiringBoard()
 {
+    console.log("Generating firing board...")
     let cellNo = 0;
     $("#board").append("<table id='firing-board' class='table is-bordered is-fullwidth has-text-centered column'></table>")
     for (let i = 0; i < 11; i++) {

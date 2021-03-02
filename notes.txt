@@ -1,0 +1,167 @@
+BATTLESHIP.JS
+
+/**
+* @ Method: addButtons
+* @ Description: adds the ship placement button for placing different size ships
+* @ Params: numberOfShips
+* @ Referenced: 
+**/
+
+/**
+* @ Method: generateBoard
+* @ Description: generates the html for the game board
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Method: generateFiringBoard
+* @ Description: assigns the firing board to the dom
+* @ Params: none
+* @ Referenced: 
+**/
+
+BOARD.JS
+
+/**
+* @ Class: Cell
+* @ Method: constructor
+* @ Description: creates an individual cell, initializes hit, missed, and occupied to false
+* @ Params: none
+* @ Referenced: board constructor
+**/
+
+/**
+* @ Class: Board
+* @ Method: constructor
+* @ Description: creates an array of cell objects
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class: 
+* @ Method: redrawBoard
+* @ Description: redraws the board with information from the player classes board objects
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class:
+* @ Method: redrawFiringBoard
+* @ Description: redraws the firing board with new information
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class:
+* @ Method: redrawFiringBoard
+* @ Description: redraws the firing board with new information
+* @ Params: none
+* @ Referenced: 
+**/
+
+GAME.JS
+
+/**
+* @ Class: Game
+* @ Method: constructor
+* @ Description: Initializes the game state 1) placing 2) firing 3) game over, sets players to players and ships to 0
+* @ Params: array of players
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Game
+* @ Method: setNumberOfShips
+* @ Description: Sets the number of ships
+* @ Params: num 
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Game
+* @ Method: getNumberOfShips
+* @ Description: Returns the number of ships
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Game
+* @ Method: getState
+* @ Description: Returns current game state
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Game
+* @ Method: switchPlayer
+* @ Description: Sets the player turn equal to the opposite of the other player
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Game
+* @ Method: currentPlayer
+* @ Description: returns the player whose turn it is
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Game
+* @ Method: otherPlayer
+* @ Description: returns the player whose turn is not up
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Game
+* @ Method: CheckWinCondition
+* @ Description: iterates through the board and checks if a cell is occupied and if it is hit
+* @ Params: array of players
+* @ Referenced: 
+**/
+
+/**
+* @ Class:
+* @ Method: resetBoardControls
+* @ Description: resets the ship placement buttons s.t. player 2 can place ships
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class:
+* @ Method: #btn-start-game
+* @ Description: is the button that starts the game and sets the number of ships using #no-of-ships
+* @ Params: click
+* @ Referenced: 
+**/
+
+/**
+* @ Class:
+* @ Method: #end-turn
+* @ Description: hides the board, and switches the players
+* @ Params: click
+* @ Referenced: 
+**/
+
+GAMEBOARD.JS
+
+/**
+* @ Class:
+* @ Method: getCells
+* @ Description:
+* @ Params: cell, axis, size
+* @ Referenced: 
+**/
+
+
+

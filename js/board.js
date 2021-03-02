@@ -20,6 +20,7 @@ class Board
      */
     constructor()
     {
+        console.log("Board Constructor...")
         this.cells = Array(100);
         for (let i = 0; i < 100; i++)
             this.cells[i] = new Cell();
@@ -33,6 +34,7 @@ class Board
  */
 function redrawBoard(player)
 {
+    console.log("Redraw Board...")
     for (let i = 0; i < 100; i++) {
         $("#" + i).removeClass("ship-clicked");
         $("#" + i).removeClass("hit");
