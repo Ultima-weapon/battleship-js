@@ -158,10 +158,63 @@ GAMEBOARD.JS
 /**
 * @ Class:
 * @ Method: getCells
-* @ Description:
+* @ Description: unclear
 * @ Params: cell, axis, size
 * @ Referenced: 
 **/
+
+/**
+* @ Class:
+* @ Method: getShipSize
+* @ Description: returns the size of the currently selected ship
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class:
+* @ Method: getAxis
+* @ Description: returns whether the user has selected the y or x axis
+* @ Params: none
+* @ Referenced: 
+**/
+
+PLAYER.JS
+
+/**
+* @ Class: Player
+* @ Method: constructor
+* @ Description: creates a player determines what turn, # of ships, and assigns a board
+* @ Params: playerID and board
+* @ Referenced: 
+**/
+
+SHIP.JS
+
+/**
+* @ Class: Ship
+* @ Method: Constructor
+* @ Description: constructs a ship with size of the ship and the ids of the cells it occupies
+* @ Params: size and cells
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Ship
+* @ Method: isSunk
+* @ Description: returns if the ship is sunk
+* @ Params: none
+* @ Referenced: 
+**/
+
+/**
+* @ Class: Ship
+* @ Method: hit
+* @ Description: creates a hit on cell
+* @ Params: hitCell
+* @ Referenced: 
+**/
+
 
 
 
