@@ -160,50 +160,41 @@ $(document).on('mouseleave', ".board-tile", function () {
 });
 
 // Firing at enemy board
+let allowUserInput = true;
 $(document).on('click', ".firing-tile", function() {
-    let cell = parseInt(this.id);
+	if(allowUserInput){
+		allowUserInput = false;
+		let cell = parseInt(this.id);
+		let enemyPlayer = game.otherPlayer();
+		console.log(enemyPlayer);
+		if (enemyPlayer.board.cells[cell].occupied == true) {
+			enemyPlayer.board.cells[cell].hit = true;
+			console.log('hit')
+		} else {
+			enemyPlayer.board.cells[cell].missed = true;
+			console.log('miss')
+		}
+		if (game.checkWinCondition(enemyPlayer)) {
+			game.state = 3;
 
-    let enemyPlayer = game.otherPlayer();
+			$("#board-space").slideUp(1000, function() {
+				if (game.players[0].isTurn)
+				{
+					$("#player-winner").text("Player 1 Wins!");
+				} else {
+					$("#player-winner").text("Player 2 Wins!");
+				}
 
-    console.log(enemyPlayer);
-
-    let isAHit = false;
-    if (enemyPlayer.board.cells[cell].occupied == true) {
-        isAHit = true;
-        enemyPlayer.board.cells[cell].hit = true;
-        console.log('hit')
-    }
-    else if(enemyPlayer.board.cells[cell].missed==true){
-        
-    }
-    else{
-        isAHit = false;
-        enemyPlayer.board.cells[cell].missed = true;
-        $("#axis-controls").toggle(function () {
-            $("#end-turn").fadeIn(400);
-            $('#end-turn').trigger('click');
-        });
-    }
-
-    enemyPlayer.board.cells[cell].hit = isAHit;
-    enemyPlayer.board.cells[cell].missed = !isAHit;
-
-    if (game.checkWinCondition(enemyPlayer)) {
-        game.state = 3;
-
-        $("#board-space").slideUp(1000, function() {
-            if (game.players[0].isTurn)
-            {
-                $("#player-winner").text("Player 1 Wins!");
-            } else {
-                $("#player-winner").text("Player 2 Wins!");
-            }
-
-            $("#win-screen").slideDown(1000);
-        });
-    }
-    //$("#firing-board").find("#" + cell).addClass("hit");
-    redrawFiringBoard(enemyPlayer);
+				$("#win-screen").slideDown(1000);
+			});
+		}
+		$("#axis-controls").toggle(function () {
+			// $("#end-turn").fadeIn(400);
+			$('#end-turn').trigger('click');
+		});
+		redrawFiringBoard(enemyPlayer);
+		setTimeout(() => { allowUserInput = true; }, 1000);
+	};
 });
 
 

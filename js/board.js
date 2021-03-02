@@ -42,7 +42,7 @@ function redrawBoard(player)
     for (let i = 0; i < 100; i++) {
         if (player.board.cells[i].hit) {
             $("#" + i).addClass("hit");
-        } else if (player.board.cells[i].miss) {
+        } else if (player.board.cells[i].missed) {
             $("#" + i).addClass("miss");
         } else if (player.board.cells[i].occupied) {
             $("#" + i).addClass("ship-clicked");
