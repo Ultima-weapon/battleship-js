@@ -48,6 +48,38 @@ class Ai extends Player
 
         }
     }
+
+    place(button)
+    {
+        let availableCells = []
+        for (let i = 0; i < 100; i++){
+            availableCells[i] = i;
+        }
+        if($(button).length > 0){
+            $(button).click();
+            let num = availableCells[Math.floor(Math.random() * availableCells.length)];
+            let hasPlaced = false;
+            while(!hasPlaced){
+                num = availableCells[Math.floor(Math.random() * availableCells.length)];
+                if(!this.board.cells[num].occupied){
+                    console.log("Placing on " + num)
+                    if(num > 9){ 
+                        let spacedNum = "3"+((''+num).split('')[0]) + " " + ((''+num).split('')[1])
+                        $("#\\" + spacedNum).click();
+                        console.log("#\\" + spacedNum);
+                    } else {    
+                        $("#\\" + ("3"+num)).click();
+                    }
+                    hasPlaced = true;
+                    console.log("Placed")
+                }
+                const index = availableCells.indexOf(num);
+                if (index > -1) {
+                    availableCells.splice(index, 1);
+                }
+            }
+        }
+    }
 };
 
 let aiEasy = new Ai(2, player2Board, 1);

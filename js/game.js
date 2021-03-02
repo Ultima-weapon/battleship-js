@@ -191,6 +191,7 @@ $(document).on('click', '#end-turn', function () {
         generateFiringBoard();
     }
 
+
     // Change whose turn it is
     game.switchPlayer();
 
@@ -200,13 +201,20 @@ $(document).on('click', '#end-turn', function () {
         let player = game.currentPlayer();
         redrawBoard(player);
         console.log(player);
+
+        if(player.isPlayer1 == false && game.type == 1 && game.state == 1){
+            for(let i = 1; i <= game.numShips; i++){
+                setTimeout(() => { console.log("Ai Placing"); player.place("#btn"+i) }, (7000 + (i * 1000)));
+            }
+        }
+
         if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
             setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, 7000);
         }
 
 
-        $("#hide-screen").fadeIn(2500, function() {
-            $("#hide-screen").fadeOut(2500, function() {
+        $("#hide-screen").fadeIn(2000, function() {
+            $("#hide-screen").fadeOut(2000, function() {
                 // Show the board
                 $("#board-space").slideDown(1000);
             });
