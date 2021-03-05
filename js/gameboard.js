@@ -169,9 +169,11 @@ $(document).on('click', ".firing-tile", function() {
 		console.log(enemyPlayer);
 		if (enemyPlayer.board.cells[cell].occupied == true) {
 			enemyPlayer.board.cells[cell].hit = true;
+			soundHit.play();
 			console.log('hit')
 		} else {
 			enemyPlayer.board.cells[cell].missed = true;
+			soundMiss.play();
 			console.log('miss')
 		}
 		if (game.checkWinCondition(enemyPlayer)) {
@@ -181,8 +183,10 @@ $(document).on('click', ".firing-tile", function() {
 				if (game.players[0].isTurn)
 				{
 					$("#player-winner").text("Player 1 Wins!");
+					soundPlayer1Win.play();
 				} else {
 					$("#player-winner").text("Player 2 Wins!");
+					soundPlayer2Win.play();
 				}
 
 				$("#win-screen").slideDown(1000);
