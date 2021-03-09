@@ -4,5 +4,5 @@ docker rm battleship-js
 docker run -dit --rm \
     --name battleship-js \
     -p 8084:80 \
-    --mount type=bind,source=/home/$USER/Documents/battleship-js,target=/usr/local/apache2/htdocs/,readonly \
+    --mount type=bind,source=/home/spigelli/Documents/repos/battleship-js,target=/usr/local/apache2/htdocs/,readonly \
     httpd:2.4
