@@ -213,9 +213,7 @@ $(document).on('click', '#end-turn', function () {
         console.log(player);
 
         if(player.isPlayer1 == false && game.type == 1 && game.state == 1){
-            for(let i = 1; i <= game.numShips; i++){
-                setTimeout(() => { console.log("Ai Placing"); player.place("#btn"+i) }, (7000 + (i * 1000)));
-            }
+            player.placeAIShip();
         }
 
         if(game.type == 1 && player.isPlayer1 == false && game.state == 2){

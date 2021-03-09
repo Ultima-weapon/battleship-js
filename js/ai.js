@@ -49,7 +49,7 @@ class Ai extends Player
         }
     }
     // Place AI Ships
-    function placeAIShip(shipSize=1){
+    placeAIShip(shipSize=1){
         let player = game.players[1];
         if (player.placedShips != game.numShips){
             let size = shipSize;
@@ -79,7 +79,7 @@ class Ai extends Player
             // Increment number of ships player has placed
             player.placedShips++;
             if (player.placedShips != game.numShips) {
-                placeAIShip(size+1);
+                this.placeAIShip(size+1);
             } else {
                 console.log(player.board.cells);
             }
