@@ -88,7 +88,7 @@ class Game
             if (player.board.cells[i].occupied == true)
                 occupiedCells++;
 
-            if (player.board.cells[i].hit == true)
+            if ((player.board.cells[i].hit == true) || (player.board.cells[i].sunk == true))
                 hitCells++;
         }
 

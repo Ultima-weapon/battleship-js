@@ -124,6 +124,7 @@ $(document).on('click', ".board-tile", function() {
         // If the ship is the right size and none of the cells are occupied, occupy them
         if (cells.length == size && alreadyOccupied == false && size != 0)
         {
+            ship_cell_ids = [];
             for (let i = 0; i < size; i++) {
                 // Add occupied class
                 $("#" + cells[i]).addClass("ship-clicked");
@@ -133,7 +134,15 @@ $(document).on('click', ".board-tile", function() {
                 
                 // Remove ship button
                 $("#btn" + size).addClass("hide");
+
+                // Append this cell to the ship object's cells
+                ship_cell_ids.push(cells[i]);
             }
+
+            // Add a new ship reference
+            player.ships[player.placedShips] = new Ship(size, ship_cell_ids);
+            console.log(player.ships);
+
             // Increment number of ships player has placed
             player.placedShips++;
 
@@ -165,13 +174,20 @@ $(document).on('click', ".firing-tile", function() {
 
     let enemyPlayer = game.otherPlayer();
 
-    console.log(enemyPlayer);
-
     let isAHit = false;
     if (enemyPlayer.board.cells[cell].occupied == true) {
         isAHit = true;
         enemyPlayer.board.cells[cell].hit = true;
         console.log('hit')
+       
+        // Add the new hit to the list of hits on the ship
+        for (let ship of enemyPlayer.ships){
+            for (let ship_cell of ship.cells){
+                if (ship_cell == cell){
+                    ship.hits.push(cell);
+                }
+            }
+        }
     }
     else if(enemyPlayer.board.cells[cell].missed==true){
         
