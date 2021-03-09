@@ -48,36 +48,43 @@ class Ai extends Player
 
         }
     }
-
-    place(button)
-    {
-        let availableCells = []
-        for (let i = 0; i < 100; i++){
-            availableCells[i] = i;
-        }
-        if($(button).length > 0){
-            $(button).click();
-            let num = availableCells[Math.floor(Math.random() * availableCells.length)];
-            let hasPlaced = false;
-            while(!hasPlaced){
-                num = availableCells[Math.floor(Math.random() * availableCells.length)];
-                if(!this.board.cells[num].occupied){
-                    console.log("Placing on " + num)
-                    if(num > 9){ 
-                        let spacedNum = "3"+((''+num).split('')[0]) + " " + ((''+num).split('')[1])
-                        $("#\\" + spacedNum).click();
-                        console.log("#\\" + spacedNum);
-                    } else {    
-                        $("#\\" + ("3"+num)).click();
+    // Place AI Ships
+    function placeAIShip(shipSize=1){
+        let player = game.players[1];
+        if (player.placedShips != game.numShips){
+            let size = shipSize;
+            //Determine orientation
+            let axis = (Math.random() < 0.5 ? 'x':'y');
+            let origin;
+            let cells = [];
+            let alreadyOccupied = false;
+            //Find an empty valid location to place the ship
+            while(cells.length != size || alreadyOccupied == true){
+                alreadyOccupied = false;
+                origin = Math.ceil(Math.random()*100)-1;
+                cells = getCells(origin, axis, size);
+                for (let i = 0; i < cells.length; i++){
+                    if (player.board.cells[cells[i]].occupied == true) {
+                        alreadyOccupied = true;
                     }
-                    hasPlaced = true;
-                    console.log("Placed")
-                }
-                const index = availableCells.indexOf(num);
-                if (index > -1) {
-                    availableCells.splice(index, 1);
                 }
             }
+            //Occupy the cells
+            for (let i = 0; i < size; i++) {
+                // Add occupied class
+                $("#" + cells[i]).addClass("ship-clicked");
+                // Store that these cells are occupied
+                player.board.cells[cells[i]].occupied = true;
+            }
+            // Increment number of ships player has placed
+            player.placedShips++;
+            if (player.placedShips != game.numShips) {
+                placeAIShip(size+1);
+            } else {
+                console.log(player.board.cells);
+            }
+        } else {
+            console.log('All AI Ships have already been placed');
         }
     }
 };
@@ -85,3 +92,4 @@ class Ai extends Player
 let aiEasy = new Ai(2, player2Board, 1);
 let aiMedium = new Ai(2, player2Board, 2);
 let aiHard = new Ai(2, player2Board, 3);
+
