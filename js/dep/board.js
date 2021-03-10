@@ -23,9 +23,8 @@ class Board
     constructor()
     {
         this.cells = Array(100);
-        for (let i = 0; i < 100; i++){
+        for (let i = 0; i < 100; i++)
             this.cells[i] = new Cell();
-        }
     }
 };
 
@@ -36,6 +35,8 @@ class Board
  */
 function redrawBoard(player)
 {
+    console.log("Redrawing player board...");
+    // Clear the game board
     for (let i = 0; i < 100; i++) {
         $("#game-board").find("#" + i).removeClass("hit");
         $("#game-board").find("#" + i).removeClass("sunk");

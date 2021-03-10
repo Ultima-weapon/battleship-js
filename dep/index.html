@@ -18,48 +18,8 @@
         </div>
 
         <!-- Board Space -->
-        <div id="board-space" class="start-game">
-            <div id="start-game" class="has-text-centered">
-                <p>Select Single Player or Multiplayer to begin</p>
-                <label class="label">Gamemode Select:</label>
-                <div class="field has-addons has-addons-centered">
-                    <div class="control">
-                        <button id="btn-single" class="button is-danger">
-                        Single Player
-                        </button>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="control">
-                        <button id="btn-multi" class="button is-info">
-                        Multiplayer
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="difficulty-selector" class="hide has-text-centered">
-                <p>Select A Difficulty:</p>
-                <label class="label">Difficulty Select:</label>
-                <div class="field has-addons has-addons-centered">
-                    <div class="control">
-                        <button id="btn-easy" class="button is-success has-text-black" style="margin:5px;">
-                        Easy
-                        </button>
-                    </div>
-                    <div>
-                    	<button id="btn-medium" class="button" style="margin:5px; background-color:#f5bf42">
-                        Medium
-                        </button>
-                    </div>
-                    <div class="control">
-                        <button id="btn-hard" class="button is-danger has-text-black" style="margin:5px;">
-                        Hard
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div id="pick-ship-number" class="hide has-text-centered">
+        <div id="board-space" class="container">
+            <div id="start-game" class="start-game">
                 <p>Click the Start button to begin!</p>
                 <p id="no-of-ships-err" class="error-msg">Please input an integer between 1 and 6.</p>
                 <label class="label">Number of ships:</label>
@@ -75,22 +35,22 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="board" class="board"></div>
+            <div id="board" class="board"></div>
 
-        <div id="placement-options" class="placement-options">
-            <div id="axis-controls" class="is-grouped">
-                <label for="x-axis">X-Axis</label>
-                <input name="axis" class="radio" id="x-axis" type="radio" checked>
+            <div id="placement-options" class="placement-options">
+                <div id="axis-controls" class="is-grouped">
+                    <label for="x-axis">X-Axis</label>
+                    <input name="axis" class="radio" id="x-axis" type="radio" checked>
+    
+                    <label for="y-axis">Y-Axis</label>
+                    <input name="axis" class="radio" id="y-axis" type="radio">
+                </div>
+    
+                <div id="ship-selector" class="is-grouped"></div>
 
-                <label for="y-axis">Y-Axis</label>
-                <input name="axis" class="radio" id="y-axis" type="radio">
+                <button id="end-turn" class="end-turn">End Turn</button>
             </div>
-
-            <div id="ship-selector" class="is-grouped"></div>
-
-            <button id="end-turn" class="end-turn">End Turn</button>
         </div>
 
         <!-- Hide Screen -->
@@ -115,7 +75,6 @@
         <script type="text/javascript" src="js/board.js"></script>
         <script type="text/javascript" src="js/ship.js"></script>
         <script type="text/javascript" src="js/player.js"></script>
-        <script type="text/javascript" src="js/ai.js"></script>
         <script type="text/javascript" src="js/gameboard.js"></script>
         <script type="text/javascript" src="js/battleship.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
