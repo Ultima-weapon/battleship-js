@@ -76,6 +76,8 @@ class Ai extends Player
                 // Store that these cells are occupied
                 player.board.cells[cells[i]].occupied = true;
             }
+            // Add the new ship to the player object
+            player.ships[player.placedShips] = new Ship(size, cells);
             // Increment number of ships player has placed
             player.placedShips++;
             if (player.placedShips != game.numShips) {

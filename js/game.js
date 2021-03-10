@@ -107,7 +107,6 @@ class Game
         return (occupiedCells == hitCells)
     }
 };
-
 /**
  * Resets the ship placement buttons for player 2 to place ships
  * @params None
@@ -122,7 +121,6 @@ function resetBoardControls()
 
     $('#axis-controls').show();
 }
-game = new Game([player1, player2]);
 
 // Start game button
 $("#btn-single").click(function() {
@@ -164,53 +162,38 @@ $("#btn-multi").click(function() {
 // Start game button
 $("#btn-start-game").click(function() {
     let numberOfShips = parseInt($("#no-of-ships").val());
-
     if (numberOfShips <= 6 && numberOfShips > 0)
     {
         console.log("Acceptable input parameters to begin game.");
         addButtons(numberOfShips);
         generateBoard();
         $("#start-game").hide();
+        $("#pick-ship-number").hide();
+        $("#div-start-game").hide();
         $("#placement-options").slideDown(400);
         $("#player-1").slideDown(400);
     } else {
         $("#no-of-ships-err").slideDown(400);
     }
-
     game.numShips = numberOfShips;
     console.log(game);
 });
 
-
+game = new Game([player1, player2]);
 // No Peek time between turns in seconds
 let timeBetweenTurns = 2;
 // End Turn button
 $(document).on('click', '#end-turn', function () {
-    console.log(game);
-
     // Hide end turn button
     $("#end-turn").slideUp(400);
-
-    if (game.state == 1 && game.players[0].isTurn) {
-        resetBoardControls();
-    } else if (game.state == 1 && game.players[1].isTurn) {
-        game.state = 2;
-        console.log("Advance game state.");
-        generateFiringBoard();
-    }
-
-
-    // Change whose turn it is
-    game.switchPlayer();
-
+    // If the game is in AI mode, we need to switch here
+    if(game.type==1){game.switchPlayer();}
 	$('#axis-controls').hide();
-
     // Hide the board
     $("#board-space").slideUp(400, function() {
         // Redraw the board with the next players information
         let player = game.currentPlayer();
         redrawBoard(player);
-        console.log(player);
 
         if(player.isPlayer1 == false && game.type == 1 && game.state == 1){
             player.placeAIShip();
@@ -219,14 +202,6 @@ $(document).on('click', '#end-turn', function () {
         if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
             setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, 7000);
         }
-
-
-        $("#hide-screen").fadeIn(2000, function() {
-            $("#hide-screen").fadeOut(2000, function() {
-                // Show the board
-                $("#board-space").slideDown(1000);
-            });
-        });
 
         if (game.state == 1 && game.players[0].isTurn) {
 			resetBoardControls();
