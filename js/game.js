@@ -186,47 +186,15 @@ $("#btn-start-game").click(function() {
 let timeBetweenTurns = 2;
 // End Turn button
 $(document).on('click', '#end-turn', function () {
-    console.log(game);
-
-    // Hide end turn button
-    $("#end-turn").slideUp(400);
-
-    if (game.state == 1 && game.players[0].isTurn) {
-        resetBoardControls();
-    } else if (game.state == 1 && game.players[1].isTurn) {
-        game.state = 2;
-        console.log("Advance game state.");
-        generateFiringBoard();
-    }
-
 
     // Change whose turn it is
-    game.switchPlayer();
 
 	$('#axis-controls').hide();
 
     // Hide the board
     $("#board-space").slideUp(400, function() {
         // Redraw the board with the next players information
-        let player = game.currentPlayer();
-        redrawBoard(player);
-        console.log(player);
-
-        if(player.isPlayer1 == false && game.type == 1 && game.state == 1){
-            player.placeAIShip();
-        }
-
-        if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
-            setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, 7000);
-        }
-
-
-        $("#hide-screen").fadeIn(2000, function() {
-            $("#hide-screen").fadeOut(2000, function() {
-                // Show the board
-                $("#board-space").slideDown(1000);
-            });
-        });
+        
 
         if (game.state == 1 && game.players[0].isTurn) {
 			resetBoardControls();
@@ -236,8 +204,19 @@ $(document).on('click', '#end-turn', function () {
 			generateFiringBoard();
 		}
 		if(game.state != 3){
+            game.switchPlayer();
+            let player = game.currentPlayer();
+            redrawBoard(player);
+            console.log(player);
+
+            if(player.isPlayer1 == false && game.type == 1 && game.state == 1){
+                //player.placeAIShip();
+            }
+
+            if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
+                setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, timeBetweenTurns*3000);
+            }
 			// Change whose turn it is
-			game.switchPlayer();
 			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
 				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
 					// Redraw the board with the next players information
