@@ -56,6 +56,11 @@ class Game
     {
         this.players[0].isTurn = !this.players[0].isTurn;
         this.players[1].isTurn = !this.players[1].isTurn;
+		if (this.players[0].isTurn){
+			soundPlayer1Turn.play();
+		} else {
+			soundPlayer2Turn.play();
+		}
     }
 
     /**
@@ -65,18 +70,20 @@ class Game
      */
     currentPlayer()
     {
-        if (this.players[0].isTurn)
+        if (this.players[0].isTurn){
             return this.players[0];
-        else
+        } else {
             return this.players[1];
+		}
     }
 
     otherPlayer()
     {
-        if (this.players[0].isTurn)
-        return this.players[1];
-    else
-        return this.players[0];
+        if (this.players[0].isTurn){
+			return this.players[1];
+		} else {
+			return this.players[0];
+		}
     }
 
     checkWinCondition(player)
@@ -137,41 +144,37 @@ $("#btn-start-game").click(function() {
 game = new Game([player1, player2]);
 
 
-
+// No Peek time between turns in seconds
+let timeBetweenTurns = 2;
 // End Turn button
 $(document).on('click', '#end-turn', function () {
     console.log(game);
 
     // Hide end turn button
     $("#end-turn").slideUp(400);
-
-    if (game.state == 1 && game.players[0].isTurn) {
-        resetBoardControls();
-    } else if (game.state == 1 && game.players[1].isTurn) {
-        game.state = 2;
-        console.log("Advance game state.");
-        generateFiringBoard();
-    }
-
-    // Change whose turn it is
-    game.switchPlayer();
+	$('#axis-controls').hide();
 
     // Hide the board
     $("#board-space").slideUp(400, function() {
-        // Redraw the board with the next players information
-        let player = game.currentPlayer();
-        redrawBoard(player);
-
-        let cPlayer=game.otherPlayer();
-        redrawFiringBoard(cPlayer);
-
-        $("#hide-screen").fadeIn(2500, function() {
-            $("#hide-screen").fadeOut(2500, function() {
-                // Show the board
-                $("#board-space").slideDown(1000);
-            });
-        });
+        if (game.state == 1 && game.players[0].isTurn) {
+			resetBoardControls();
+		} else if (game.state == 1 && game.players[1].isTurn) {
+			game.state = 2;
+			console.log("Advance game state.");
+			generateFiringBoard();
+		}
+		if(game.state != 3){
+			// Change whose turn it is
+			game.switchPlayer();
+			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
+				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
+					// Redraw the board with the next players information
+					redrawBoard(game.currentPlayer());
+					redrawFiringBoard(game.otherPlayer());
+					// Show the board
+					$("#board-space").slideDown(1000);
+				});
+			});
+		}
     });
-
-
 });
