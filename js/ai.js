@@ -12,12 +12,84 @@ class Ai extends Player
         // Calls contructor from Player Class
         super(playerID, board);
         this.difficulty = difficulty;
+        
+        this.randomMoves = [];
+        for (var i = 0; i <= 99; i++) {
+           this.randomMoves.push(i);
+        }
+
+        this.moveList = [];        
+
     }
 
-    /**
-     * Calls a seperate move function depending on the difficulty of the Ai
-     * @param {Board} opponentBoard - the current Board of the Opponent
-     */
+    moveEasy(opponentBoard)
+    {
+        var index = Math.floor(Math.random() * this.randomMoves.length);
+        var num = this.randomMoves[index];
+        this.randomMoves.splice(index,1);
+        console.log("Clicked on " + num);
+        console.log("Techinnally: " + "#\\3" + Math.floor((num)/10) + " " + ((num)%10))
+        if(opponentBoard.cells[num].occupied){
+            this.calculateNextMoves(num,opponentBoard);
+
+            if(num<10){
+                $("#\\3"+num).click()
+            } else {
+                $("#\\3" + Math.floor((num)/10) + " " + ((num)%10)).click()
+            }
+            return true;
+        } else {
+            if(num<10){
+                $("#\\3"+num).click()
+            } else {
+                $("#\\3" + Math.floor((num)/10) + " " + ((num)%10)).click()
+            }
+            return false;
+        }
+    }
+
+    calculateNextMoves(num, opponentBoard){
+        //Check Up
+            if( this.randomMoves.includes(num-10) && !opponentBoard.cells[num-10].hit && !opponentBoard.cells[num-10].missed){
+                this.moveList.push(num-10);
+            }
+            //Check Right
+            if(this.randomMoves.includes(num+1) && !opponentBoard.cells[num+1].hit && !opponentBoard.cells[num+1].missed){
+                this.moveList.push(num+1);
+            }
+            //Check Down
+            if( this.randomMoves.includes(num+10) && !opponentBoard.cells[num+10].hit && !opponentBoard.cells[num+10].missed){
+                this.moveList.push(num+10);
+            }
+            //Check Left
+            if(this.randomMoves.includes(num-1) && !opponentBoard.cells[num-1].hit && !opponentBoard.cells[num-1].missed){
+                this.moveList.push(num-1);
+            }
+    }
+
+    moveMedium(opponentBoard, move, placement)
+    {
+        console.log(this.moveList);
+        if(this.moveList.length > 0){
+            var currentMove = this.moveList.shift();
+            var index = this.randomMoves.indexOf(currentMove);
+            if (index > -1) {
+              this.randomMoves.splice(index, 1);
+            }
+            if(opponentBoard.cells[currentMove].occupied){
+                this.calculateNextMoves(currentMove,opponentBoard);
+            }
+            if(currentMove<10){
+                $("#\\3"+currentMove).click()
+            } else {
+                $("#\\3" + Math.floor((currentMove)/10) + " " + ((currentMove)%10)).click()
+            }
+        } else {
+            console.log("Firing Random")
+            var gotHit = this.moveEasy(opponentBoard);
+        }
+    }
+
     moveHard(opponentBoard)
     {
         // Finds next ship to hit
@@ -25,22 +97,33 @@ class Ai extends Player
             let currentCell = opponentBoard.cells[i];
             if(currentCell.occupied && !currentCell.hit){
                 console.log("Clicked on " + (30+i));
-                $("#\\" + (30+i)).click();
+                if(i<10){
+                    $("#\\3"+i).click()
+                } else {
+                    $("#\\3" + Math.floor((i)/10) + " " + ((i)%10)).click()
+                }
                 break;
             }
         }
     }
 
+    /**
+     * Calls a seperate move function depending on the difficulty of the Ai
+     * @param {Board} opponentBoard - the current Board of the Opponent
+     */
     move(opponentBoard)
     {
         switch(this.difficulty){
             case 1:
-                // This is Easy Mode
+                console.log("Firing Easy")
+                this.moveEasy(opponentBoard);
                 break;
             case 2:
-                // This is Medium Mode
+                console.log("Firing Medium")
+                this.moveMedium(opponentBoard, this.targeting, this.targetingNext);
                 break;
             case 3:
+                console.log("Firing Hard")
                 this.moveHard(opponentBoard);
                 break;
             default:
@@ -76,8 +159,6 @@ class Ai extends Player
                 // Store that these cells are occupied
                 player.board.cells[cells[i]].occupied = true;
             }
-            // Add the new ship to the player object
-            player.ships[player.placedShips] = new Ship(size, cells);
             // Increment number of ships player has placed
             player.placedShips++;
             if (player.placedShips != game.numShips) {
@@ -91,7 +172,6 @@ class Ai extends Player
     }
 };
 
-let aiEasy = new Ai(2, player2Board, 1);
-let aiMedium = new Ai(2, player2Board, 2);
-let aiHard = new Ai(2, player2Board, 3);
-
+var aiEasy = new Ai(2, player2Board, 1);
+var aiMedium = new Ai(2, player2Board, 2);
+var aiHard = new Ai(2, player2Board, 3);
