@@ -1,272 +1,177 @@
-class Game
+class Ai extends Player
 {
     /**
-     * Creates the over-arching Game object responsible for managing most aspects of the game.
+     * Constructs a blank ai class and attaches a Board object.
      * @constructor
-     * @param {Array[Players]} players - array of Players to start the Game with.
+     * @param {number} playerID 
+     * @param {Board} board 
+     * @param {number} difficulty
      */
-    constructor(players)
+    constructor(playerID, board, difficulty)
     {
-        // States
-        // 1 = Placing
-        // 2 = Firing
-        // 3 = Game Over
-        this.state = 1;
-        this.type = 0;
-        this.difficulty = 0;
-        this.players = players;
-        this.numShips = 0;
-
-        console.log("Game class initialized and in state " + this.state);
-    }
-
-    /**
-     * Sets the numberOfShips variable which is integral for turn checking during the placement phase of the game.
-     * @param {number} num - Number of ships each player should have
-     */
-    setNumberOfShips(num)
-    {
-        this.numberOfShips = num;
-    }
-
-    /**
-     * Gets the number of ships player's are allowed to place.
-     * @param None
-     * @returns {number} - the number of ships player's are allowed to place.
-     */
-    getNumberOfShips()
-    {
-        return this.numberOfShips;
-    }
-
-    /**
-     * Returns the current state of the game.
-     * @params None
-     * @returns {number} - The current state of the game: 1, the placement phase. 2, the firing phase. 3, win condition has been met.
-     */
-    getState()
-    {
-        return this.state;
-    }
-
-    /**
-     * Changes which player is currently active. Used for ending of turns.
-     * @params None
-     * @returns None
-     */
-    switchPlayer()
-    {
-        this.players[0].isTurn = !this.players[0].isTurn;
-        this.players[1].isTurn = !this.players[1].isTurn;
-		if (this.players[0].isTurn){
-			soundPlayer1Turn.play();
-		} else {
-			soundPlayer2Turn.play();
-		}
-    }
-
-    /**
-     * Returns the Player object of the currently active player.
-     * @params None
-     * @returns {Player} - the currently active Player object
-     */
-    currentPlayer()
-    {
-        if (this.players[0].isTurn){
-            return this.players[0];
-        } else {
-            return this.players[1];
-		}
-    }
-
-    otherPlayer()
-    {
-        if (this.players[0].isTurn){
-			return this.players[1];
-		} else {
-			return this.players[0];
-		}
-    }
-
-    checkWinCondition(player)
-    {
-        // Get number of occupied cells
-        let occupiedCells = 0;
-        let hitCells = 0;
-        for (let i = 0; i < 100; i++) {
-            if (player.board.cells[i].occupied == true)
-                occupiedCells++;
-
-            if ((player.board.cells[i].hit == true) || (player.board.cells[i].sunk == true))
-                hitCells++;
+        // Calls contructor from Player Class
+        super(playerID, board);
+        this.difficulty = difficulty;
+        
+        this.randomMoves = [];
+        for (var i = 0; i <= 99; i++) {
+           this.randomMoves.push(i);
         }
 
-        console.log("Occupied: " + occupiedCells);
-        console.log("Hit: " + hitCells);
+        this.moveList = [];        
 
-        return (occupiedCells == hitCells)
+    }
+
+    moveEasy(opponentBoard)
+    {
+        var index = Math.floor(Math.random() * this.randomMoves.length);
+        var num = this.randomMoves[index];
+        this.randomMoves.splice(index,1);
+        console.log("Clicked on " + num);
+        console.log("Techinnally: " + "#\\3" + Math.floor((num)/10) + " " + ((num)%10))
+        if(opponentBoard.cells[num].occupied){
+            this.calculateNextMoves(num,opponentBoard);
+
+            if(num<10){
+                $("#\\3"+num).click()
+            } else {
+                $("#\\3" + Math.floor((num)/10) + " " + ((num)%10)).click()
+            }
+            return true;
+        } else {
+            if(num<10){
+                $("#\\3"+num).click()
+            } else {
+                $("#\\3" + Math.floor((num)/10) + " " + ((num)%10)).click()
+            }
+            return false;
+        }
+    }
+
+    calculateNextMoves(num, opponentBoard){
+        //Check Up
+            if( this.randomMoves.includes(num-10) && !opponentBoard.cells[num-10].hit && !opponentBoard.cells[num-10].missed){
+                this.moveList.push(num-10);
+            }
+            //Check Right
+            if(this.randomMoves.includes(num+1) && !opponentBoard.cells[num+1].hit && !opponentBoard.cells[num+1].missed){
+                this.moveList.push(num+1);
+            }
+            //Check Down
+            if( this.randomMoves.includes(num+10) && !opponentBoard.cells[num+10].hit && !opponentBoard.cells[num+10].missed){
+                this.moveList.push(num+10);
+            }
+            //Check Left
+            if(this.randomMoves.includes(num-1) && !opponentBoard.cells[num-1].hit && !opponentBoard.cells[num-1].missed){
+                this.moveList.push(num-1);
+            }
+    }
+
+    moveMedium(opponentBoard, move, placement)
+    {
+        console.log(this.moveList);
+        if(this.moveList.length > 0){
+            var currentMove = this.moveList.shift();
+            var index = this.randomMoves.indexOf(currentMove);
+            if (index > -1) {
+              this.randomMoves.splice(index, 1);
+            }
+            if(opponentBoard.cells[currentMove].occupied){
+                this.calculateNextMoves(currentMove,opponentBoard);
+            }
+            if(currentMove<10){
+                $("#\\3"+currentMove).click()
+            } else {
+                $("#\\3" + Math.floor((currentMove)/10) + " " + ((currentMove)%10)).click()
+            }
+        } else {
+            console.log("Firing Random")
+            var gotHit = this.moveEasy(opponentBoard);
+        }
+    }
+
+    moveHard(opponentBoard)
+    {
+        // Finds next ship to hit
+        for (let i = 0; i < 100; i++){
+            let currentCell = opponentBoard.cells[i];
+            if(currentCell.occupied && !currentCell.hit){
+                console.log("Clicked on " + (30+i));
+                if(i<10){
+                    $("#\\3"+i).click()
+                } else {
+                    $("#\\3" + Math.floor((i)/10) + " " + ((i)%10)).click()
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * Calls a seperate move function depending on the difficulty of the Ai
+     * @param {Board} opponentBoard - the current Board of the Opponent
+     */
+    move(opponentBoard)
+    {
+        switch(this.difficulty){
+            case 1:
+                console.log("Firing Easy")
+                this.moveEasy(opponentBoard);
+                break;
+            case 2:
+                console.log("Firing Medium")
+                this.moveMedium(opponentBoard, this.targeting, this.targetingNext);
+                break;
+            case 3:
+                console.log("Firing Hard")
+                this.moveHard(opponentBoard);
+                break;
+            default:
+                // Invalid Difficulty Setting
+
+        }
+    }
+    // Place AI Ships
+    placeAIShip(shipSize=1){
+        let player = game.players[1];
+        if (player.placedShips != game.numShips){
+            let size = shipSize;
+            //Determine orientation
+            let axis = (Math.random() < 0.5 ? 'x':'y');
+            let origin;
+            let cells = [];
+            let alreadyOccupied = false;
+            //Find an empty valid location to place the ship
+            while(cells.length != size || alreadyOccupied == true){
+                alreadyOccupied = false;
+                origin = Math.ceil(Math.random()*100)-1;
+                cells = getCells(origin, axis, size);
+                for (let i = 0; i < cells.length; i++){
+                    if (player.board.cells[cells[i]].occupied == true) {
+                        alreadyOccupied = true;
+                    }
+                }
+            }
+            //Occupy the cells
+            for (let i = 0; i < size; i++) {
+                // Add occupied class
+                $("#" + cells[i]).addClass("ship-clicked");
+                // Store that these cells are occupied
+                player.board.cells[cells[i]].occupied = true;
+            }
+            // Increment number of ships player has placed
+            player.placedShips++;
+            if (player.placedShips != game.numShips) {
+                this.placeAIShip(size+1);
+            } else {
+                console.log(player.board.cells);
+            }
+        } else {
+            console.log('All AI Ships have already been placed');
+        }
     }
 };
-/**
- * Resets the ship placement buttons for player 2 to place ships
- * @params None
- * @returns None
- */
-function resetBoardControls()
-{
-    $('#ship-selector').children('button').each(function () {
-        $("#" + this.id).removeClass("hide");
-        $("#" + this.id).attr("disabled", false);
-    });
 
-    $('#axis-controls').show();
-}
-game = new Game([player1, player2]);
-
-// Start game button
-$("#btn-single").click(function() {
-    game.type = 1;
-    $("#start-game").hide();
-    $("#difficulty-selector").slideDown(400);
-});
-
-$("#btn-easy").click(function() {
-    
-    game.players = [player1, aiEasy];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-
-$("#btn-medium").click(function() {
-    
-    game.players = [player1, aiMedium];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-$("#btn-hard").click(function() {
-    
-    game.players = [player1, aiHard];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-// Start game button
-$("#btn-multi").click(function() {
-    game.type = 2;
-    game.players = [player1, player2];
-    $("#start-game").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-// Start game button
-$("#btn-single").click(function() {
-    game.type = 1;
-    $("#start-game").hide();
-    $("#difficulty-selector").slideDown(400);
-});
-
-$("#btn-easy").click(function() {
-    
-    game.players = [player1, aiEasy];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-
-$("#btn-medium").click(function() {
-    
-    game.players = [player1, aiMedium];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-$("#btn-hard").click(function() {
-    
-    game.players = [player1, aiHard];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-// Start game button
-$("#btn-multi").click(function() {
-    game.type = 2;
-    game.players = [player1, player2];
-    $("#start-game").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-// Start game button
-$("#btn-start-game").click(function() {
-    let numberOfShips = parseInt($("#no-of-ships").val());
-    if (numberOfShips <= 6 && numberOfShips > 0)
-    {
-        console.log("Acceptable input parameters to begin game.");
-        addButtons(numberOfShips);
-        generateBoard();
-        $("#start-game").hide();
-        $("#pick-ship-number").hide();
-        $("#div-start-game").hide();
-        $("#placement-options").slideDown(400);
-        $("#player-1").slideDown(400);
-    } else {
-        $("#no-of-ships-err").slideDown(400);
-    }
-    game.numShips = numberOfShips;
-    console.log(game);
-});
-
-game = new Game([player1, player2]);
-
-// No Peek time between turns in seconds
-let timeBetweenTurns = 2;
-// End Turn button
-$(document).on('click', '#end-turn', function () {
-    // Hide end turn button
-    $("#end-turn").slideUp(400);
-
-	$('#axis-controls').hide();
-    // Hide the board
-    $("#board-space").slideUp(400, function() {
-        if (game.state == 1 && game.players[0].isTurn) {
-			resetBoardControls();
-		} else if (game.state == 1 && game.players[1].isTurn) {
-			game.state = 2;
-			console.log("Advance game state.");
-			generateFiringBoard();
-		}
-		if(game.state != 3){
-            game.switchPlayer();
-            let player = game.currentPlayer();
-            redrawBoard(player);
-            console.log(player);
-
-            if(player.isPlayer1 == false && game.type == 1 && game.state == 1){
-                player.placeAIShip();
-                $("#end-turn").click();
-            }
-
-            if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
-                setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, timeBetweenTurns*3000);
-            }
-    			// Change whose turn it is
-    			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
-    				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
-    					// Redraw the board with the next players information
-                        
-                        redrawBoard(game.currentPlayer());
-    					redrawFiringBoard(game.otherPlayer());
-                        $("#board-space").slideDown(1000);
-    					// Show the board
-                        if(player.isPlayer1 == false){
-                            $("#game-board").hide();
-                        } else {
-                            $("#game-board").show();
-                        }
-    				});
-    			});
-            
-		}
-    });
-});
+var aiEasy = new Ai(2, player2Board, 1);
+var aiMedium = new Ai(2, player2Board, 2);
+var aiHard = new Ai(2, player2Board, 3);
