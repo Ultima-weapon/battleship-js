@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+        <title>Battleship.js</title>
+        <link rel="stylesheet" href="css/bulma.css" >
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+
+        <!-- Heading -->
+        <div id="header" class="title-header">
+            <h1 class="title">Battleship.js</h1>
+            <h2 class="subtitle">The classic game in your browser</h2>
+        </div>
+
+        <!-- Board Space -->
+        <div id="board-space" >
+            <div id="div-start-game" class="start-game">
+                <div id="start-game" class="has-text-centered">
+                    <p>Select Single Player or Multiplayer to begin</p>
+                    <label class="label">Gamemode Select:</label>
+                    <div class="field has-addons has-addons-centered">
+                        <div class="control">
+                            <button id="btn-single" class="button is-danger">
+                            Single Player
+                            </button>
+                        </div>
+                        <div>
+                        </div>
+                        <div class="control">
+                            <button id="btn-multi" class="button is-info">
+                            Multiplayer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="difficulty-selector" class="hide has-text-centered">
+                    <p>Select A Difficulty:</p>
+                    <label class="label">Difficulty Select:</label>
+                    <div class="field has-addons has-addons-centered">
+                        <div class="control">
+                            <button id="btn-easy" class="button is-success has-text-black" style="margin:5px;">
+                            Easy
+                            </button>
+                        </div>
+                        <div>
+                            <button id="btn-medium" class="button" style="margin:5px; background-color:#f5bf42">
+                            Medium
+                            </button>
+                        </div>
+                        <div class="control">
+                            <button id="btn-hard" class="button is-danger has-text-black" style="margin:5px;">
+                            Hard
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="pick-ship-number" class="hide has-text-centered">
+                    <p>Click the Start button to begin!</p>
+                    <p id="no-of-ships-err" class="error-msg">Please input an integer between 1 and 6.</p>
+                    <label class="label">Number of ships:</label>
+
+                    <div class="input-dialouge">
+                        <div class="input-control">
+                            <input id="no-of-ships" name="no-of-ships" class="input" type="text" placeholder="1-6">
+                        </div>
+                        <div class="input-control">
+                            <button id="btn-start-game" class="ships-submit">
+                            Start!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="board" class="board"></div>
+
+            <div id="placement-options" class="placement-options">
+                <div id="axis-controls" class="is-grouped">
+                    <label for="x-axis">X-Axis</label>
+                    <input name="axis" class="radio" id="x-axis" type="radio" checked>
+
+                    <label for="y-axis">Y-Axis</label>
+                    <input name="axis" class="radio" id="y-axis" type="radio">
+                </div>
+
+                <div id="ship-selector" class="is-grouped"></div>
+
+                <button id="end-turn" class="end-turn">End Turn</button>
+            </div>
+        </div>
+
+
+        <!-- Hide Screen -->
+        <div id="hide-screen" class="hide-screen">
+            <h1 class="is-size-1">No peeking!</h1>
+        </div>
+
+        <!-- Win Screen -->
+        <div id="win-screen" class="win-screen">
+            <h1 class="is-size-1">Winner!</h1>
+            <p id="player-winner"></p>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <p>&copy; Best Programming Group 2021</p>
+        </footer>
+
+
+        <!-- JavaScript includes -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/board.js"></script>
+        <script type="text/javascript" src="js/ship.js"></script>
+        <script type="text/javascript" src="js/player.js"></script>
+        <script type="text/javascript" src="js/gameboard.js"></script>
+        <script type="text/javascript" src="js/battleship.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+        <script type="text/javascript" src="js/audio.js"></script>
+        <script type="text/javascript" src="js/ai.js"></script>
+        <script type="text/javascript" src="js/__test__.js"></script>
+    </body>
+</html>

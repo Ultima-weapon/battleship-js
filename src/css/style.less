@@ -1,0 +1,179 @@
+@import url("https://raw.githubusercontent.com/jgthms/bulma/master/css/bulma.css");
+@import url("https://raw.githubusercontent.com/spigelli/bulma-less/master/src/less/bulma.less");
+
+.title-header{
+    .container;
+    .has-text-centered;
+    .title{
+        .is-size-1;
+    }
+    .subtitle{
+        .is-size-4;
+    }
+}
+
+.start-game {
+    .has-text-centered;
+     background: #ddd;
+     padding: 1.5%;
+     border-radius: 20px;
+     width: fit-content;
+     height: fit-content !important;
+     margin: 0 auto;
+}
+
+.error-msg {
+    .has-text-danger;
+    .hide;
+}
+
+.input-dialouge {
+    .field.has-addons;
+    .field.has-addons.has-addons-centered;
+    .input-control{
+        .control
+    }
+}
+
+.ships-submit{
+    .button;
+    .button.is-success;
+}
+
+.board{
+    .container;
+    .columns;
+    .columns.is-centered;
+    .columns.is-vcentered;
+}
+
+.table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.no-flex {
+    flex: none;
+}
+
+
+.generated-board {
+    .table; 
+    .table.is-bordered; 
+    .table.is-fullwidth; 
+    .has-text-centered; 
+    .column;
+    width: auto;
+    flex-grow: 0;
+    display:table;
+    flex: none;
+}
+
+.table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.placement-options{
+    .hide;
+    .has-text-centered;
+    padding-bottom: 2%;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.end-turn{
+    .button;
+    .button.is-danger;
+    .hide;
+}
+
+.ship-selector{
+    .button;
+    .button.is-success;
+    margin-right: 5px;
+}
+
+.hide-screen{
+    .container;
+    .has-text-centered;
+    .hide;
+}
+
+.win-screen{
+    .container;
+    .has-text-centered;
+    .hide;
+}
+
+.footer{
+    .container;
+    .has-text-centered;
+}
+
+.selector-btn {
+}
+
+.hide {
+  display: none;
+}
+
+#header {
+  height: 15vh;
+}
+
+#board-space {
+  height: 75vh;
+}
+
+#player-1 {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.board {
+    flex-grow: 0;
+    margin: auto auto;
+}
+
+.ship-outline {
+  background-color: #ebfffc !important;
+}
+
+.ship-clicked {
+  background-color: #00947e !important;
+  .has-text-white;
+}
+
+.ship-outline-fail {
+  background-color: #feecf0 !important;
+}
+
+td
+{
+  .has-text-centered;
+  height: 41px;
+  width: 52px;
+}
+
+th
+{
+  .has-text-centered;
+}
+
+.hit 
+{
+  background-color: #cc0f35 !important;
+  .has-text-white;
+}
+
+.miss
+{
+  background-color: #296fa8 !important;
+  .has-text-white;
+}
+
+.sunk
+{
+  background-color: #feecf0 !important;
+}
