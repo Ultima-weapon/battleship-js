@@ -61,7 +61,9 @@ class Game
 		if (this.players[0].isTurn){
 			soundPlayer1Turn.play();
 		} else {
-			soundPlayer2Turn.play();
+			if (this.state == 2 || this.type == 2){
+				soundPlayer2Turn.play();
+			}
 		}
     }
 
