@@ -259,7 +259,7 @@ $(document).on('click', '#end-turn', function () {
     					redrawFiringBoard(game.otherPlayer());
                         $("#board-space").slideDown(1000);
     					// Show the board
-                        if(player.isPlayer1 == false){
+                        if(player.isPlayer1 == false && game.type == 1){
                             $("#game-board").hide();
                         } else {
                             $("#game-board").show();
