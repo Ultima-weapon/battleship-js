@@ -248,7 +248,7 @@ $(document).on('click', '#end-turn', function () {
             }
 
             if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
-                setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, timeBetweenTurns*3000);
+                setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, timeBetweenTurns*2500);
             }
     			// Change whose turn it is
     			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
