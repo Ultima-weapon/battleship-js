@@ -18,14 +18,7 @@ class Ai extends Player
            this.randomMoves.push(i);
         }
 
-        this.targeting = 'x';
-        this.targetingPlacement = 0;
-        this.targetingNext = 0;
-
-        this.checkTop = false;
-        this.checkRight = false;
-        this.checkBottom = false;
-        this.checkLeft = false;
+        this.moveList = [];        
 
     }
 
@@ -33,12 +26,12 @@ class Ai extends Player
     {
         var index = Math.floor(Math.random() * this.randomMoves.length);
         var num = this.randomMoves[index];
-        this.targetingPlacement = num;
-        this.targetingNext = num;
         this.randomMoves.splice(index,1);
         console.log("Clicked on " + num);
         console.log("Techinnally: " + "#\\3" + Math.floor((num)/10) + " " + ((num)%10))
         if(opponentBoard.cells[num].occupied){
+            this.calculateNextMoves(num,opponentBoard);
+
             if(num<10){
                 $("#\\3"+num).click()
             } else {
@@ -50,159 +43,50 @@ class Ai extends Player
                 $("#\\3"+num).click()
             } else {
                 $("#\\3" + Math.floor((num)/10) + " " + ((num)%10)).click()
-            }            return false;
+            }
+            return false;
         }
+    }
+
+    calculateNextMoves(num, opponentBoard){
+        //Check Up
+            if( this.randomMoves.includes(num-10) && !opponentBoard.cells[num-10].hit && !opponentBoard.cells[num-10].missed){
+                this.moveList.push(num-10);
+            }
+            //Check Right
+            if(this.randomMoves.includes(num+1) && !opponentBoard.cells[num+1].hit && !opponentBoard.cells[num+1].missed){
+                this.moveList.push(num+1);
+            }
+            //Check Down
+            if( this.randomMoves.includes(num+10) && !opponentBoard.cells[num+10].hit && !opponentBoard.cells[num+10].missed){
+                this.moveList.push(num+10);
+            }
+            //Check Left
+            if(this.randomMoves.includes(num-1) && !opponentBoard.cells[num-1].hit && !opponentBoard.cells[num-1].missed){
+                this.moveList.push(num-1);
+            }
     }
 
     moveMedium(opponentBoard, move, placement)
     {
-        console.log("Current State: " + this.targeting);
-        console.log("Top:" + this.checkTop);
-        console.log("Right: " + this.checkRight);
-        console.log("Left: " + this.checkLeft);
-        console.log("Bottom: " + this.checkBottom);
-        if(this.checkTop == true && this.checkRight == true && this.checkDown == true && this.checkLeft == true){
-            this.checkTop = false;
-            this.checkRight = false;
-            this.checkDown = false;
-            this.checkLeft = false;
-            this.targeting = 'x';
-            move = 'x';
-            console.log("Resetting");
-        }
-
-
-        switch(move){
-            
-            case 'u':
-                console.log("Checking Top")
-                if(this.checkTop && this.checkBottom){
-                    this.moveMedium(opponentBoard, 'r', this.targetingPlacement);
-                    break;
-                }
-                if(!this.checkTop){
-                    if( placement-10 < 0 || opponentBoard.cells[placement-10].hit || opponentBoard.cells[placement-10].missed){
-                        this.checkTop = true;
-                        this.moveMedium(opponentBoard, 'd', this.targetingPlacement);
-                    } else {
-                        console.log("Clicked on " + (placement-10));
-                        if((placement-10)<10){
-                            $("#\\3"+(placement-10)).click()
-                        } else {
-                            $("#\\3" + Math.floor((placement-10)/10) + " " + ((placement-10)%10)).click()
-                        }
-                        if(!opponentBoard.cells[placement-10].occupied){
-                            this.checkTop = true;
-                            this.targeting = 'd';
-                        } else {
-                            this.targeting = 'u';
-                            this.targetingNext = this.targetingNext-10;
-                        }
-                    }
-                }
-
-                break;
-
-            case 'r':
-                console.log("Checking Right")
-                console.log("Right: " + this.checkRight);
-                console.log("Left: " + this.checkLeft);
-                if(this.checkRight && this.checkLeft){
-                        this.moveMedium(opponentBoard, 'u', this.targetingPlacement);
-                }
-
-                if(!this.checkRight){
-                    if(Math.floor((placement+1)/10) > Math.floor(placement/10)|| opponentBoard.cells[placement+1].hit || opponentBoard.cells[placement+1].missed){
-                        this.checkRight = true;
-                        this.moveMedium(opponentBoard, 'l', this.targetingPlacement);
-                    } else {
-                        console.log("Clicked on " + (placement+1));
-                        if((placement+1)<10){
-                            $("#\\3"+(placement+1)).click()
-                        } else {
-                            $("#\\3" + Math.floor((placement+1)/10) + " " + ((placement+1)%10)).click()
-                        }
-                        if(!opponentBoard.cells[placement+1].occupied){
-                            this.checkRight = true;
-                            this.targeting = 'l';
-                        } else {
-                            this.targeting = 'r';
-                            this.targetingNext = this.targetingNext+1;
-                        }
-                    }
-                } else {
-                    this.moveMedium(opponentBoard, 'l', this.targetingPlacement);
-                }
-
-                break;
-
-            case 'd':
-                console.log("Checking Bottom")
-
-                if(this.checkTop && this.checkBottom){
-                    this.moveMedium(opponentBoard, 'r', this.targetingPlacement);
-                }
-                if(!this.checkBottom){
-                    if(placement+10 >100 ||  opponentBoard.cells[placement+10].hit || opponentBoard.cells[placement+10].missed){
-                        this.checkBottom = true;
-                        this.moveMedium(opponentBoard, 'u', this.targetingPlacement);
-                    } else {                        
-                        console.log("Clicked on " + (placement+10));
-                        if((placement+10)<10){
-                            $("#\\3"+(placement+10)).click()
-                        } else {
-                            $("#\\3" + Math.floor((placement+10)/10) + " " + ((placement+10)%10)).click()
-                        }
-                        if(!opponentBoard.cells[placement+10].occupied){
-                            this.checkBottom = true;
-                            this.targeting = 'd';
-                        } else {
-                            this.targeting = 'd';
-                            this.targetingNext = this.targetingNext+10;
-                        }
-                    }
-                }
-                break;
-
-            case 'l':
-                console.log("Checking Left")
-                if(this.checkRight && this.checkLeft){
-                    this.moveMedium(opponentBoard, 'u', this.targetingPlacement);
-                }
-
-                if(!this.checkLeft){
-                    console.log("Statement 1: " + Math.floor((placement-1)/10));
-                    console.log("Statement 2: " + Math.floor(placement/10));
-                    if(Math.floor((placement-1)/10) < Math.floor(placement/10)|| opponentBoard.cells[placement-1].hit || opponentBoard.cells[placement-1].missed){
-                        this.checkLeft = true;
-                        this.moveMedium(opponentBoard, 'r', this.targetingPlacement);
-                    } else {                
-                        console.log("Clicked on " + (placement-1));
-                        if(placement-1<10){
-                            $("#\\3"+(placement-1)).click()
-                        } else {
-                            $("#\\3" + Math.floor((placement-1)/10) + " " + ((placement-1)%10)).click()                        
-                        }
-                        
-                        if(!opponentBoard.cells[placement-1].occupied){
-                            this.checkLeft = true;
-                            this.targeting = 'r';
-                        } else {
-                            this.targeting = 'l';
-                            this.targetingNext = this.targetingNext-1;
-                        }
-                    }
-                } else {
-                      this.moveMedium(opponentBoard, 'r', this.targetingPlacement);
-                } 
-                break;
-
-            default:
-                console.log("Firing Random")
-                var gotHit = this.moveEasy(opponentBoard);
-                if(gotHit){
-                    this.targeting = 'u';
-                }
+        console.log(this.moveList);
+        if(this.moveList.length > 0){
+            var currentMove = this.moveList.shift();
+            var index = this.randomMoves.indexOf(currentMove);
+            if (index > -1) {
+              this.randomMoves.splice(index, 1);
+            }
+            if(opponentBoard.cells[currentMove].occupied){
+                this.calculateNextMoves(currentMove,opponentBoard);
+            }
+            if(currentMove<10){
+                $("#\\3"+currentMove).click()
+            } else {
+                $("#\\3" + Math.floor((currentMove)/10) + " " + ((currentMove)%10)).click()
+            }
+        } else {
+            console.log("Firing Random")
+            var gotHit = this.moveEasy(opponentBoard);
         }
     }
 
