@@ -1,0 +1,29 @@
+{
+  "name": "battleship-js",
+  "version": "2.0.0",
+  "description": "Simple battleship game",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"http-server -p 8080 ./src/ \" \"http-server -p 8081 ./docs/build/html/ \" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Ultima-weapon/battleship-js.git"
+  },
+  "keywords": [
+    "battle",
+    "ship",
+    "battleship"
+  ],
+  "author": "spigelli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ultima-weapon/battleship-js/issues"
+  },
+  "homepage": "https://github.com/Ultima-weapon/battleship-js#readme",
+  "dependencies": {
+    "http-server": "^0.12.3",
+    "npm-scripts": "^1.4.0"
+  }
+}
