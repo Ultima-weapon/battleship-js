@@ -217,8 +217,6 @@ $("#btn-start-game").click(function() {
     console.log(game);
 });
 
-game = new Game([player1, player2]);
-
 // No Peek time between turns in seconds
 let timeBetweenTurns = 2;
 // End Turn button
