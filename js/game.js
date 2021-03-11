@@ -210,22 +210,30 @@ $(document).on('click', '#end-turn', function () {
             console.log(player);
 
             if(player.isPlayer1 == false && game.type == 1 && game.state == 1){
-                //player.placeAIShip();
+                player.placeAIShip();
+                $("#end-turn").click();
             }
 
             if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
                 setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, timeBetweenTurns*3000);
             }
-			// Change whose turn it is
-			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
-				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
-					// Redraw the board with the next players information
-					redrawBoard(game.currentPlayer());
-					redrawFiringBoard(game.otherPlayer());
-					// Show the board
-					$("#board-space").slideDown(1000);
-				});
-			});
+    			// Change whose turn it is
+    			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
+    				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
+    					// Redraw the board with the next players information
+                        
+                        redrawBoard(game.currentPlayer());
+    					redrawFiringBoard(game.otherPlayer());
+                        $("#board-space").slideDown(1000);
+    					// Show the board
+                        if(player.isPlayer1 == false){
+                            $("#game-board").hide();
+                        } else {
+                            $("#game-board").show();
+                        }
+    				});
+    			});
+            
 		}
     });
 });
