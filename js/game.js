@@ -81,6 +81,15 @@ class Game
 		}
     }
 
+    //Checks if player2
+    isPlayer2() {
+        if (game.currentPlayer() == this.players[0])
+        {
+            return true;
+        }
+        return false;
+    }
+
     otherPlayer()
     {
         if (this.players[0].isTurn){
@@ -225,6 +234,15 @@ let timeBetweenTurns = 2;
 $(document).on('click', '#end-turn', function () {
     // Hide end turn button
     $("#end-turn").slideUp(400);
+    
+    // Display the current player
+    if (game.isPlayer2()) {
+        $("#player-turn").text("Player 2");
+    }
+    else
+    {
+        $("#player-turn").text("Player 1");
+    }
 
 	$('#axis-controls').hide();
     // Hide the board
@@ -254,8 +272,7 @@ $(document).on('click', '#end-turn', function () {
     			// Change whose turn it is
     			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
     				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
-    					// Redraw the board with the next players information
-                        
+                        // Redraw the board with the next players information
                         redrawBoard(game.currentPlayer());
     					redrawFiringBoard(game.otherPlayer());
                         $("#board-space").slideDown(1000);
