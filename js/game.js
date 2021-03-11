@@ -246,6 +246,7 @@ $(document).on('click', '#end-turn', function () {
             }
 
             if(game.type == 1 && player.isPlayer1 == false && game.state == 2){
+                allowUserInput = false;
                 setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, timeBetweenTurns*2500);
             }
     			// Change whose turn it is
@@ -258,8 +259,10 @@ $(document).on('click', '#end-turn', function () {
                         $("#board-space").slideDown(1000);
     					// Show the board
                         if(player.isPlayer1 == false && game.type == 1){
+                            allowUserInput = false;
                             $("#game-board").hide();
                         } else {
+                            allowUserInput = true;
                             $("#game-board").show();
                         }
     				});

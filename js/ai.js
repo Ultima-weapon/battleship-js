@@ -50,19 +50,19 @@ class Ai extends Player
 
     calculateNextMoves(num, opponentBoard){
         //Check Up
-            if( this.randomMoves.includes(num-10) && !opponentBoard.cells[num-10].hit && !opponentBoard.cells[num-10].missed){
+            if( this.randomMoves.includes(num-10) && !opponentBoard.cells[num-10].hit && !opponentBoard.cells[num-10].missed && !opponentBoard.cells[num-10].sunk){
                 this.moveList.push(num-10);
             }
             //Check Right
-            if(this.randomMoves.includes(num+1) && !opponentBoard.cells[num+1].hit && !opponentBoard.cells[num+1].missed){
+            if(this.randomMoves.includes(num+1) && !opponentBoard.cells[num+1].hit && !opponentBoard.cells[num+1].missed && !opponentBoard.cells[num+1].sunk){
                 this.moveList.push(num+1);
             }
             //Check Down
-            if( this.randomMoves.includes(num+10) && !opponentBoard.cells[num+10].hit && !opponentBoard.cells[num+10].missed){
+            if( this.randomMoves.includes(num+10) && !opponentBoard.cells[num+10].hit && !opponentBoard.cells[num+10].missed && !opponentBoard.cells[num+10].sunk){
                 this.moveList.push(num+10);
             }
             //Check Left
-            if(this.randomMoves.includes(num-1) && !opponentBoard.cells[num-1].hit && !opponentBoard.cells[num-1].missed){
+            if(this.randomMoves.includes(num-1) && !opponentBoard.cells[num-1].hit && !opponentBoard.cells[num-1].missed && !opponentBoard.cells[num-1].sunk){
                 this.moveList.push(num-1);
             }
     }
@@ -95,10 +95,10 @@ class Ai extends Player
         // Finds next ship to hit
         for (let i = 0; i < 100; i++){
             let currentCell = opponentBoard.cells[i];
-            if(currentCell.occupied && !currentCell.hit){
+            if(currentCell.occupied && !currentCell.hit && !currentCell.sunk){
                 console.log("Clicked on " + (30+i));
                 if(i<10){
-                    $("#\\3"+i).click()
+                    $("#\\3"+i).click() 
                 } else {
                     $("#\\3" + Math.floor((i)/10) + " " + ((i)%10)).click()
                 }
@@ -113,6 +113,7 @@ class Ai extends Player
      */
     move(opponentBoard)
     {
+        allowUserInput = true;
         switch(this.difficulty){
             case 1:
                 console.log("Firing Easy")
@@ -130,6 +131,7 @@ class Ai extends Player
                 // Invalid Difficulty Setting
 
         }
+        allowUserInput = false;
     }
     // Place AI Ships
     placeAIShip(shipSize=1){

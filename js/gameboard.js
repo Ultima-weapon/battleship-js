@@ -170,7 +170,10 @@ $(document).on('mouseleave', ".board-tile", function () {
 
 // Firing at enemy board
 let allowUserInput = true;
+
+
 $(document).on('click', ".firing-tile", function() {
+    console.log(allowUserInput);
 	if(allowUserInput){
 		let cell = parseInt(this.id);
 		let enemyPlayer = game.otherPlayer();
@@ -215,6 +218,7 @@ $(document).on('click', ".firing-tile", function() {
 				$('#end-turn').trigger('click');
 			});
 			redrawFiringBoard(enemyPlayer);
+
 			setTimeout(() => { allowUserInput = true; }, 1000);
 		};
 	};
