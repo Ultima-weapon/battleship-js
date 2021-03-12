@@ -182,13 +182,18 @@ $(document).on('click', ".firing-tile", function() {
 			console.log(enemyPlayer);
 			if (enemyPlayer.board.cells[cell].occupied == true) {
 				enemyPlayer.board.cells[cell].hit = true;
-				soundHit.play();
+				// soundHit.play();
 				console.log('hit')
                 // Add the new hit to the list of hits on the ship
                 for (let ship of enemyPlayer.ships){
                     for (let ship_cell of ship.cells){
                         if (ship_cell == cell){
                             ship.hits.push(cell);
+							if(ship.hits.length == ship.size){
+								soundSunk.play();
+							} else {
+								soundHit.play();
+							}
                         }
                     }
                 }
@@ -204,10 +209,10 @@ $(document).on('click', ".firing-tile", function() {
 					if (game.players[0].isTurn)
 					{
 						$("#player-winner").text("Player 1 Wins!");
-						soundPlayer1Win.play();
+						setTimeout(() => {soundPlayer1Win.play();},1500);
 					} else {
 						$("#player-winner").text("Player 2 Wins!");
-						soundPlayer2Win.play();
+						setTimeout(() => {soundPlayer2Win.play();},1500);
 					}
 
 					$("#win-screen").slideDown(1000);

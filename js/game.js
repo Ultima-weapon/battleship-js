@@ -59,10 +59,10 @@ class Game
         this.players[0].isTurn = !this.players[0].isTurn;
         this.players[1].isTurn = !this.players[1].isTurn;
 		if (this.players[0].isTurn){
-			soundPlayer1Turn.play();
+			setTimeout(() => {soundPlayer1Turn.play();},1500);
 		} else {
 			if (this.state == 2 || this.type == 2){
-				soundPlayer2Turn.play();
+				setTimeout(() => {soundPlayer2Turn.play();},1500);
 			}
 		}
     }
