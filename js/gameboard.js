@@ -1,9 +1,21 @@
+/* -----------------------------------------------------------------------------
+ *
+ * File Name: gameboard.js
+ * Author: (Team 7 - Project 2 Team) & (Team 3 - Original Team)
+ * Assignment: EECS 448 - Project 2
+ * Description: Gameboard Functions & Events
+ * Date: 14 Mar 2020
+ *
+ ---------------------------------------------------------------------------- */
+
 /**
- * Gets the adjacent cells when hovering or placing ships in the initial phase of the game.
- * @param {number} cell - The HTML ID of the origin cell
- * @param {char} axis - The axis of orientation. 'x' or 'y'
- * @param {number} size - The size of the ship currently selected.
- */
+* @pre None
+* @post FUNCTION [getCells(cell, axis, size)]: Gets the adjacent cells when hovering or placing ships in the initial phase of the game.
+* @param cell, number - The HTML ID of the origin cell
+* @param axis, string - The axis of orientation. 'x' or 'y'
+* @param size, number - The size of the ship currently selected.
+* @return None
+**/
 function getCells(cell, axis, size)
 {
     let cells = [];
@@ -34,9 +46,11 @@ function getCells(cell, axis, size)
 }
 
 /**
- * Returns the size of the currently selected ship button on the page.
- * @returns {number} - (Integer) the size of the ship
- */
+* @pre None
+* @post FUNCTION [getShipSize()]: Returns the size of the currently selected ship button on the page.
+* @param None
+* @return [number], size of currently selected ship.
+**/
 function getShipSize()
 {
     let shipSize = 0;
@@ -50,15 +64,22 @@ function getShipSize()
 }
 
 /**
- * Gets the currently selected axis of orientation on the page.
- * @returns {char} - 'x' or 'y'
- */
+* @pre None
+* @post FUNCTION [getAxis()]: Gets the currently selected axis of orientation on the page.
+* @param None
+* @return [string], 'x' or 'y'
+**/
 function getAxis()
 {
     return ($("#x-axis").is(":checked") ? 'x' : 'y');
 }
 
-// Selector button logic
+/**
+* @pre None
+* @post EVENT [onClick, ".selector-btn"]: Ship Selector button logic
+* @param None
+* @return None
+**/
 $(document).on('click', ".selector-btn", function() {
     $('#ship-selector').children('button').each(function () {
         $("#" + this.id).attr("disabled", false);
@@ -66,7 +87,12 @@ $(document).on('click', ".selector-btn", function() {
     $("#" + this.id).attr("disabled", true);
 });
 
-// Showing ship outline
+/**
+* @pre None
+* @post EVENT [onMouseOver, ".board-tile"]: Show Ship Outline while placing ships
+* @param None
+* @return None
+**/
 $(document).on('mouseover', ".board-tile", function() {
     // Set cell to the ID of td being hovered
     let origin = parseInt(this.id);
@@ -98,7 +124,12 @@ $(document).on('mouseover', ".board-tile", function() {
     }
 });
 
-// Placement of ships
+/**
+* @pre None
+* @post EVENT [onClick, ".board-tile"]: Place Ship on the gameboard
+* @param None
+* @return None
+**/
 $(document).on('click', ".board-tile", function() {
     let player = game.currentPlayer();
 
@@ -162,16 +193,26 @@ $(document).on('click', ".board-tile", function() {
     }
 });
 
-// Remove classes on mouse leave
+/**
+* @pre None
+* @post EVENT [onMouseLeave, ".board-tile"]: Remove classes on mouse leave
+* @param None
+* @return None
+**/
 $(document).on('mouseleave', ".board-tile", function () {
     $(".board-tile").removeClass("ship-outline");
     $(".board-tile").removeClass("ship-outline-fail");
 });
 
-// Firing at enemy board
+// Global - Allow user input toggle.
 let allowUserInput = true;
 
-
+/**
+* @pre None
+* @post EVENT [onClick, ".firing-tile"]: Fire at enemy board
+* @param None
+* @return None
+**/
 $(document).on('click', ".firing-tile", function() {
     console.log(allowUserInput);
 	if(allowUserInput){
@@ -182,7 +223,6 @@ $(document).on('click', ".firing-tile", function() {
 			console.log(enemyPlayer);
 			if (enemyPlayer.board.cells[cell].occupied == true) {
 				enemyPlayer.board.cells[cell].hit = true;
-				// soundHit.play();
 				console.log('hit')
                 // Add the new hit to the list of hits on the ship
                 for (let ship of enemyPlayer.ships){
@@ -204,7 +244,6 @@ $(document).on('click', ".firing-tile", function() {
 			}
 			if (game.checkWinCondition(enemyPlayer)) {
 				game.state = 3;
-
 				$("#board-space").slideUp(1000, function() {
 					if (game.players[0].isTurn)
 					{
@@ -214,20 +253,14 @@ $(document).on('click', ".firing-tile", function() {
 						$("#player-winner").text("Player 2 Wins!");
 						setTimeout(() => {soundPlayer2Win.play();},1500);
 					}
-
 					$("#win-screen").slideDown(1000);
 				});
 			}
 			$("#axis-controls").toggle(function () {
-				// $("#end-turn").fadeIn(400);
 				$('#end-turn').trigger('click');
 			});
 			redrawFiringBoard(enemyPlayer);
-
 			setTimeout(() => { allowUserInput = true; }, 1000);
 		};
 	};
 });
-
-
-
