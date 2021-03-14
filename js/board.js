@@ -1,9 +1,22 @@
+/* -----------------------------------------------------------------------------
+ *
+ * File Name: board.js
+ * Author: (Team 7 - Project 2 Team) & (Team 3 - Original Team)
+ * Assignment: EECS 448 - Project 2
+ * Description: Gameboard Classes
+ * Date: 14 Mar 2020
+ *
+ ---------------------------------------------------------------------------- */
+
 class Cell 
 {
-    /**
-     * @constructor 
-     * @param None 
-     */
+	/**
+	* @constructor
+	* @pre None
+	* @post CONSTRUCTOR: Setup default values for a cell.
+	* @param None
+	* @return None
+	**/
     constructor()
     {
         this.hit = false;
@@ -16,10 +29,13 @@ class Cell
 
 class Board
 {
-    /**
-     * @constructor 
-     * @param None 
-     */
+	/**
+	* @constructor
+	* @pre None
+	* @post CONSTRUCTOR: Setup default values for a gameboard.
+	* @param None
+	* @return None
+	**/
     constructor()
     {
         this.cells = Array(100);
@@ -30,10 +46,11 @@ class Board
 };
 
 /**
- * Redraws the board with the information from the Player classes's Board object
- * @param {Player} player 
- * @return None
- */
+* @pre None
+* @post FUNCTION [redrawBoard(player)]: Redraw the gameboard using new variable changes to each cell
+* @param player, which player is the gameboard data being redrawn for?
+* @return None
+**/
 function redrawBoard(player)
 {
     for (let i = 0; i < 100; i++) {
@@ -69,7 +86,12 @@ function redrawBoard(player)
     }
 }
 
-// Redraws the firing board with the information from another player
+/**
+* @pre None
+* @post FUNCTION [redrawFiringBoard(player)]: Redraws the firing board with the information from another player
+* @param player, which player is the gameboard data being redrawn for?
+* @return None
+**/
 function redrawFiringBoard(player)
 {
     console.log("Redrawing firing board...");
