@@ -1,10 +1,22 @@
+/* -----------------------------------------------------------------------------
+ *
+ * File Name: game.js
+ * Author: (Team 7 - Project 2 Team) & (Team 3 - Original Team)
+ * Assignment: EECS 448 - Project 2
+ * Description: Game Class & Functions
+ * Date: 14 Mar 2020
+ *
+ ---------------------------------------------------------------------------- */
+
 class Game
 {
-    /**
-     * Creates the over-arching Game object responsible for managing most aspects of the game.
-     * @constructor
-     * @param {Array[Players]} players - array of Players to start the Game with.
-     */
+	/**
+	* @constructor
+	* @pre None
+	* @post CONSTRUCTOR: Creates the over-arching Game object responsible for managing most aspects of the game.
+	* @param players, array of Players to start the Game with.
+	* @return None
+	**/
     constructor(players)
     {
         // States
@@ -20,40 +32,45 @@ class Game
         console.log("Game class initialized and in state " + this.state);
     }
 
-    /**
-     * Sets the numberOfShips variable which is integral for turn checking during the placement phase of the game.
-     * @param {number} num - Number of ships each player should have
-     */
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [setNumberOfShips(num)]: Sets the numberOfShips variable which is integral for turn checking during the placement phase of the game.
+	* @param num, Number of ships each player should have
+	* @return None
+	**/
     setNumberOfShips(num)
     {
         this.numberOfShips = num;
     }
 
-    /**
-     * Gets the number of ships player's are allowed to place.
-     * @param None
-     * @returns {number} - the number of ships player's are allowed to place.
-     */
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [getNumberOfShips()]: Gets the number of ships player's are allowed to place.
+	* @param None
+	* @return [number], the number of ships player's are allowed to place.
+	**/
     getNumberOfShips()
     {
         return this.numberOfShips;
     }
 
-    /**
-     * Returns the current state of the game.
-     * @params None
-     * @returns {number} - The current state of the game: 1, the placement phase. 2, the firing phase. 3, win condition has been met.
-     */
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [getState()]: Returns the current state of the game.
+	* @param None
+	* @return [number],  The current state of the game: 1, the placement phase. 2, the firing phase. 3, win condition has been met.
+	**/
     getState()
     {
         return this.state;
     }
 
-    /**
-     * Changes which player is currently active. Used for ending of turns.
-     * @params None
-     * @returns None
-     */
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [switchPlayer()]: Changes which player is currently active. Used for ending of turns. Also plays audio notification.
+	* @param None
+	* @return None
+	**/
     switchPlayer()
     {
         this.players[0].isTurn = !this.players[0].isTurn;
@@ -67,11 +84,12 @@ class Game
 		}
     }
 
-    /**
-     * Returns the Player object of the currently active player.
-     * @params None
-     * @returns {Player} - the currently active Player object
-     */
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [currentPlayer()]: Returns the Player object of the currently active player.
+	* @param None
+	* @return [player], the currently active Player object
+	**/
     currentPlayer()
     {
         if (this.players[0].isTurn){
@@ -81,7 +99,12 @@ class Game
 		}
     }
 
-    //Checks if player2
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [isPlayer2()]: Checks if player 2 is the current active player.
+	* @param None
+	* @return [boolean], true if player 2 is the current active player.
+	**/
     isPlayer2() {
         if (game.currentPlayer() == this.players[0])
         {
@@ -90,6 +113,12 @@ class Game
         return false;
     }
 
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [otherPlayer()]: Gets the non-active player object
+	* @param None
+	* @return [player], returns the non-active player object
+	**/
     otherPlayer()
     {
         if (this.players[0].isTurn){
@@ -99,6 +128,12 @@ class Game
 		}
     }
 
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [checkWinCondition(player)]: Check if the win/lose condition has been satisfied
+	* @param [player], the player object you want to check for win/lose conditions
+	* @return [boolean], true if player has met the win conditions
+	**/
     checkWinCondition(player)
     {
         // Get number of occupied cells
@@ -118,11 +153,16 @@ class Game
         return (occupiedCells == hitCells)
     }
 };
+
+// Setup new Game object.
+game = new Game([player1, player2]);
+
 /**
- * Resets the ship placement buttons for player 2 to place ships
- * @params None
- * @returns None
- */
+* @pre None
+* @post FUNCTION [resetBoardControls()]: Reset gameboard to allow second player to place ships
+* @param None
+* @return None
+**/
 function resetBoardControls()
 {
     $('#ship-selector').children('button').each(function () {
@@ -132,15 +172,13 @@ function resetBoardControls()
 
     $('#axis-controls').show();
 }
-game = new Game([player1, player2]);
 
-// Start game button
-$("#btn-single").click(function() {
-    game.type = 1;
-    $("#start-game").hide();
-    $("#difficulty-selector").slideDown(400);
-});
-
+/**
+* @pre None
+* @post EVENT [onClick, "#btn-easy"]: Easy AI Mode button
+* @param None
+* @return None
+**/
 $("#btn-easy").click(function() {
     
     game.players = [player1, aiEasy];
@@ -148,7 +186,12 @@ $("#btn-easy").click(function() {
     $("#pick-ship-number").slideDown(400);
 });
 
-
+/**
+* @pre None
+* @post EVENT [onClick, "#btn-medium"]: Medium AI Mode button
+* @param None
+* @return None
+**/
 $("#btn-medium").click(function() {
     
     game.players = [player1, aiMedium];
@@ -156,6 +199,12 @@ $("#btn-medium").click(function() {
     $("#pick-ship-number").slideDown(400);
 });
 
+/**
+* @pre None
+* @post EVENT [onClick, "#btn-hard"]: Hard AI Mode button
+* @param None
+* @return None
+**/
 $("#btn-hard").click(function() {
     
     game.players = [player1, aiHard];
@@ -163,7 +212,12 @@ $("#btn-hard").click(function() {
     $("#pick-ship-number").slideDown(400);
 });
 
-// Start game button
+/**
+* @pre None
+* @post EVENT [onClick, "#btn-multi"]: Multi-player select button
+* @param None
+* @return None
+**/
 $("#btn-multi").click(function() {
     game.type = 2;
     game.players = [player1, player2];
@@ -171,44 +225,24 @@ $("#btn-multi").click(function() {
     $("#pick-ship-number").slideDown(400);
 });
 
-// Start game button
+/**
+* @pre None
+* @post EVENT [onClick, "#btn-single"]: Single-player select button
+* @param None
+* @return None
+**/
 $("#btn-single").click(function() {
     game.type = 1;
     $("#start-game").hide();
     $("#difficulty-selector").slideDown(400);
 });
 
-$("#btn-easy").click(function() {
-    
-    game.players = [player1, aiEasy];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-
-$("#btn-medium").click(function() {
-    
-    game.players = [player1, aiMedium];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-$("#btn-hard").click(function() {
-    
-    game.players = [player1, aiHard];
-    $("#difficulty-selector").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-// Start game button
-$("#btn-multi").click(function() {
-    game.type = 2;
-    game.players = [player1, player2];
-    $("#start-game").hide();
-    $("#pick-ship-number").slideDown(400);
-});
-
-// Start game button
+/**
+* @pre None
+* @post EVENT [onClick, "#btn-start-game"]: Start game button
+* @param None
+* @return None
+**/
 $("#btn-start-game").click(function() {
     let numberOfShips = parseInt($("#no-of-ships").val());
     if (numberOfShips <= 6 && numberOfShips > 0)
@@ -230,7 +264,14 @@ $("#btn-start-game").click(function() {
 
 // No Peek time between turns in seconds
 let timeBetweenTurns = 2;
+
 // End Turn button
+/**
+* @pre None
+* @post EVENT [onClick, "#end-turn"]: End Turn button (Also called when clicking a gameboard button)
+* @param None
+* @return None
+**/
 $(document).on('click', '#end-turn', function () {
     // Hide end turn button
     $("#end-turn").slideUp(400);
@@ -269,24 +310,23 @@ $(document).on('click', '#end-turn', function () {
                 allowUserInput = false;
                 setTimeout(() => { console.log("Ai Moving"); player.move(game.players[0].board) }, timeBetweenTurns*2500);
             }
-    			// Change whose turn it is
-    			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
-    				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
-                        // Redraw the board with the next players information
-                        redrawBoard(game.currentPlayer());
-    					redrawFiringBoard(game.otherPlayer());
-                        $("#board-space").slideDown(1000);
-    					// Show the board
-                        if(player.isPlayer1 == false && game.type == 1){
-                            allowUserInput = false;
-                            $("#game-board").hide();
-                        } else {
-                            allowUserInput = true;
-                            $("#game-board").show();
-                        }
-    				});
-    			});
-            
+			// Change whose turn it is
+			$("#hide-screen").fadeIn((timeBetweenTurns*1000)/2, function() {
+				$("#hide-screen").fadeOut((timeBetweenTurns*1000)/2, function() {
+					// Redraw the board with the next players information
+					redrawBoard(game.currentPlayer());
+					redrawFiringBoard(game.otherPlayer());
+					$("#board-space").slideDown(1000);
+					// Show the board
+					if(player.isPlayer1 == false && game.type == 1){
+						allowUserInput = false;
+						$("#game-board").hide();
+					} else {
+						allowUserInput = true;
+						$("#game-board").show();
+					}
+				});
+			});
 		}
     });
 });
