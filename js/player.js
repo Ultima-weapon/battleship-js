@@ -1,11 +1,22 @@
+/* -----------------------------------------------------------------------------
+ *
+ * File Name: player.js
+ * Author: (Team 7 - Project 2 Team) & (Team 3 - Original Team)
+ * Assignment: EECS 448 - Project 2
+ * Description: Player Class
+ * Date: 14 Mar 2020
+ *
+ ---------------------------------------------------------------------------- */
+
 class Player
 {
-    /**
-     * Constructs a blank Player class and attaches a Board object.
-     * @constructor
-     * @param {number} playerID 
-     * @param {Board} board 
-     */
+	/**
+	* @constructor
+	* @pre None
+	* @post CONSTRUCTOR: Constructs a blank Player class and attaches a Board object.
+	* @param playerID, number representing the player ID.
+	* @return board, board class respesenting the players gameboard.
+	**/
     constructor(playerID, board)
     {
         // Array to hold ships
