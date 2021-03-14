@@ -1,8 +1,19 @@
+/* -----------------------------------------------------------------------------
+ *
+ * File Name: battleship.js
+ * Author: (Team 7 - Project 2 Team) & (Team 3 - Original Team)
+ * Assignment: EECS 448 - Project 2
+ * Description: Gameboard Hypertext Generation
+ * Date: 14 Mar 2020
+ *
+ ---------------------------------------------------------------------------- */
+
 /**
- * Adds ship placement buttons for placing of different sized ships.
- * @param {number} numberOfShips 
- * @returns None
- */
+* @pre None
+* @post FUNCTION [addButtons(numberOfShips)]: Adds ship placement buttons for placing of different sized ships.
+* @param numberOfShips, number from 1 to 6
+* @return None
+**/
 function addButtons(numberOfShips)
 {
     for (i = 0; i < numberOfShips; i++)
@@ -13,10 +24,11 @@ function addButtons(numberOfShips)
 }
 
 /**
- * Dynamically generates the HTML for the display of the board
- * @param None
- * @returns None
- */
+* @pre None
+* @post FUNCTION [generateBoard()]: Dynamically generates the HTML for the display of the board.
+* @param None
+* @return None
+**/
 function generateBoard()
 {
     let cellNo = 0;
@@ -41,7 +53,12 @@ function generateBoard()
     console.log("Finished generating board.");
 }
 
-// Dynamically assigns the firing board to the DOM
+/**
+* @pre None
+* @post FUNCTION [generateFiringBoard()]: Dynamically assigns the firing board to the DOM
+* @param None
+* @return None
+**/
 function generateFiringBoard()
 {
     let cellNo = 0;
