@@ -1,12 +1,24 @@
+/* -----------------------------------------------------------------------------
+ *
+ * File Name: ai.js
+ * Author: Team 7
+ * Assignment: EECS 448 - Project 2
+ * Description: AI Player Class (Inherits from Player Class)
+ * Date: 14 Mar 2020
+ *
+ ---------------------------------------------------------------------------- */
+ 
 class Ai extends Player
 {
-    /**
-     * Constructs a blank ai class and attaches a Board object.
-     * @constructor
-     * @param {number} playerID 
-     * @param {Board} board 
-     * @param {number} difficulty
-     */
+	/**
+	* @constructor
+	* @pre None
+	* @post CONSTRUCTOR: Constructs a blank ai class and attaches a Board object.
+	* @param playerID, number representing the player ID.
+	* @param board, board class object representing the player's gameboard.
+	* @param difficulty, number representing the AI's difficuly level.
+	* @return None
+	**/
     constructor(playerID, board, difficulty)
     {
         // Calls contructor from Player Class
@@ -22,6 +34,12 @@ class Ai extends Player
 
     }
 
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [moveEasy(opponentBoard)]: Easy Mode / Random Attack - Attacks opponent player's board.
+	* @param opponentBoard, board representing the opponent player's board.
+	* @return [boolean], true if the attack was a hit.
+	**/
     moveEasy(opponentBoard)
     {
         var index = Math.floor(Math.random() * this.randomMoves.length);
@@ -48,6 +66,13 @@ class Ai extends Player
         }
     }
 
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [calculateNextMoves(num, opponentBoard)]: Helper function to determine Medium Mode next attack move.
+	* @param num, number representing the origin gameboard cell ID.
+	* @param opponentBoard, board object representing the opponent player's gameboard.
+	* @return None.
+	**/
     calculateNextMoves(num, opponentBoard){
         //Check Up
             if( this.randomMoves.includes(num-10) && !opponentBoard.cells[num-10].hit && !opponentBoard.cells[num-10].missed && !opponentBoard.cells[num-10].sunk){
@@ -67,6 +92,14 @@ class Ai extends Player
             }
     }
 
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [moveMedium(opponentBoard, move, placement)]: Medium Mode - Attacks opponent player's board.
+	* @param opponentBoard, board representing the opponent player's board.
+	* @param move, number representing targeting cell ID
+	* @param placement, number representing the next targeting cell ID
+	* @return None
+	**/
     moveMedium(opponentBoard, move, placement)
     {
         console.log(this.moveList);
@@ -90,6 +123,12 @@ class Ai extends Player
         }
     }
 
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [moveHard(opponentBoard)]: Hard Mode - Attacks opponent player's board.
+	* @param opponentBoard, board representing the opponent player's board.
+	* @return None
+	**/
     moveHard(opponentBoard)
     {
         // Finds next ship to hit
@@ -107,10 +146,12 @@ class Ai extends Player
         }
     }
 
-    /**
-     * Calls a seperate move function depending on the difficulty of the Ai
-     * @param {Board} opponentBoard - the current Board of the Opponent
-     */
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [move(opponentBoard)]: Calls a seperate move function depending on the difficulty of the Ai.
+	* @param opponentBoard, board representing the opponent player's board.
+	* @return None
+	**/
     move(opponentBoard)
     {
         allowUserInput = true;
@@ -133,7 +174,13 @@ class Ai extends Player
         }
         allowUserInput = false;
     }
-    // Place AI Ships
+
+	/**
+	* @pre None
+	* @post PUBLIC METHOD [placeAIShip(shipSize=1)]: Recursive function that places AI Ships on the AI's gameboard until the placed ship count equals the game ship count.
+	* @param shipSize, number (default = 1) representing the size of the ship to be placed.
+	* @return None
+	**/
     placeAIShip(shipSize=1){
         let player = game.players[1];
         if (player.placedShips != game.numShips){
@@ -174,6 +221,7 @@ class Ai extends Player
     }
 };
 
+// Create AI Players
 var aiEasy = new Ai(2, player2Board, 1);
 var aiMedium = new Ai(2, player2Board, 2);
 var aiHard = new Ai(2, player2Board, 3);
