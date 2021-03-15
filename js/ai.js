@@ -190,6 +190,7 @@ class Ai extends Player
             let origin;
             let cells = [];
             let alreadyOccupied = false;
+			let ship_cell_ids = [];
             //Find an empty valid location to place the ship
             while(cells.length != size || alreadyOccupied == true){
                 alreadyOccupied = false;
@@ -201,13 +202,19 @@ class Ai extends Player
                     }
                 }
             }
+			// Remove ship button
+            $("#btn" + size).addClass("hide");
             //Occupy the cells
             for (let i = 0; i < size; i++) {
                 // Add occupied class
                 $("#" + cells[i]).addClass("ship-clicked");
                 // Store that these cells are occupied
                 player.board.cells[cells[i]].occupied = true;
+				// Append this cell to the ship object's cells
+                ship_cell_ids.push(cells[i]);
             }
+			// Add a new ship reference
+            player.ships[player.placedShips] = new Ship(size, ship_cell_ids);
             // Increment number of ships player has placed
             player.placedShips++;
             if (player.placedShips != game.numShips) {
